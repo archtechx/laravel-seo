@@ -29,7 +29,6 @@
     },
     "require-dev": {
         "orchestra/testbench": "^6.9",
-        "vimeo/psalm": "^4.2",
         "nunomaduro/larastan": "^0.6.10",
         "pestphp/pest": "^1.2",
         "pestphp/pest-plugin-laravel": "^1.0"

@@ -23,13 +23,6 @@ jobs:
     - name: Run tests
       run: vendor/bin/phpunit
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install composer dependencies
-      run: composer install
-    - name: Run psalm
-      run: vendor/bin/psalm
-
   phpstan:
     name: Static analysis (PHPStan)
     runs-on: ubuntu-latest
