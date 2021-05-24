@@ -166,46 +166,6 @@ The `flipp()` method also returns a signed URL to the image, which lets you use 
 <img alt="@seo('title')" src="@seo('flipp', 'blog')">
 ```
 
-## Customization
-
-This package is completely flexible, and can be customized either by having its views modified (to change the existing templates), or by you developing an extension (to add more templates).
-
-### Views
-
-You can publish the Blade views by running `php artisan vendor:publish --tag=seo-views`.
-
-### Extensions
-
-To use a custom extension, create a Blade *component* with the desired meta tags. The component should read data using `{{ seo()->get('foo') }}` or `@seo('foo')`.
-
-For example:
-
-```php
-<meta name="facebook-title" content="@seo('facebook.foo')">
-```
-
-Once your view is created, register the extension:
-
-```php
-seo()->extension('facebook', view: 'my-component')
-// The extension will use <x-my-component>
-```
-
-To set data for an extension (in our case `facebook`), simply prefix calls with the extension name in camelCase, or use the `->set()` method:
-
-```php
-seo()->facebookFoo('bar')
-seo()->facebookTitle('About us')
-seo()->set('facebook.description', 'We are a web development agency that ...')
-seo(['facebook.description' => 'We are a web development agency that ...'])
-```
-
-To disable an extension, set the second argument in the `extension()` call to false:
-
-```php
-seo()->extension('facebook', false);
-```
-
 ## Examples
 
 ### Service Provider
@@ -256,6 +216,46 @@ This example uses a Blade view that sets global SEO config using the values that
 <p class="prose">
     {{ $page->body }}
 </p>
+```
+
+## Customization
+
+This package is completely flexible, and can be customized either by having its views modified (to change the existing templates), or by you developing an extension (to add more templates).
+
+### Views
+
+You can publish the Blade views by running `php artisan vendor:publish --tag=seo-views`.
+
+### Extensions
+
+To use a custom extension, create a Blade *component* with the desired meta tags. The component should read data using `{{ seo()->get('foo') }}` or `@seo('foo')`.
+
+For example:
+
+```php
+<meta name="facebook-title" content="@seo('facebook.foo')">
+```
+
+Once your view is created, register the extension:
+
+```php
+seo()->extension('facebook', view: 'my-component')
+// The extension will use <x-my-component>
+```
+
+To set data for an extension (in our case `facebook`), simply prefix calls with the extension name in camelCase, or use the `->set()` method:
+
+```php
+seo()->facebookFoo('bar')
+seo()->facebookTitle('About us')
+seo()->set('facebook.description', 'We are a web development agency that ...')
+seo(['facebook.description' => 'We are a web development agency that ...'])
+```
+
+To disable an extension, set the second argument in the `extension()` call to false:
+
+```php
+seo()->extension('facebook', false);
 ```
 
 ## Development
