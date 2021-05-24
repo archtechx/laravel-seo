@@ -1,8 +1,8 @@
 # laravel-seo
 
-This is a simple package for improving SEO via OpenGraph and Twitter meta tags.
+This is a simple and extensible package for improving SEO via meta tags, such as OpenGraph tags.
 
-It's semi-opinionated, as it's what we use for all of our websites. At the same time, it's not overengineered like many other SEO packages.
+By default, it uses `<title>` and OpenGraph tags. It also ships with a Twitter extension. You're, of course, free to write your own extensions as needed.
 
 **Features**:
 - Setting SEO tags from PHP
@@ -10,6 +10,7 @@ It's semi-opinionated, as it's what we use for all of our websites. At the same 
 - Integration with [Flipp](https://useflipp.com), to automatically generate cover images
 - Custom extension support
 - Expressive & simple API
+- Customizable views
 
 Example usage:
 ```php
@@ -77,6 +78,24 @@ In general, you'll want to use `@seo(['title' => 'foo'])` at the start of a view
 That is, if you'll use the helpers in Blade at all. Some apps will only use the PHP helper.
 
 For Twitter, use the `twitter.author` format, e.g. `@seo('twitter.author')`.
+
+### Twitter
+
+By default, no Twitter tags will be included. If you manually enable the extension by calling:
+
+```php
+seo()->twitter();
+```
+
+in a service provider for example, the extension will be enabled.
+
+Once it's enabled, it will copy all default (OpenGraph) values and use them for the Twitter card schema.
+
+When a value is set specifically for Twitter, it will be prioritized over the general fallback values.
+
+```php
+seo()->twitterTitle('About us')
+```
 
 ### Defaults
 
