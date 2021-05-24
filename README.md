@@ -1,4 +1,4 @@
-# laravel-seo
+# Laravel SEO
 
 This is a simple and extensible package for improving SEO via meta tags, such as OpenGraph tags.
 
@@ -207,6 +207,23 @@ seo()->extension('facebook', false);
 ```
 
 ## Examples
+
+### Service Provider
+
+This example sets the default state in a service provider's `boot()` method:
+
+```php
+seo()
+    ->site('ArchTech — Meticulously architected web applications')
+    ->title(
+        default: 'ArchTech — Meticulously architected web applications',
+        modify: fn (string $title) => $title . ' | ArchTech'
+    )
+    ->description(default: 'We are a development agency ...')
+    ->image(default: fn () => asset('header.png'))
+    ->flipp('blog', 'o1vhcg5npgfu')
+    ->twitterSite('archtechx');
+```
 
 ### Controller
 
