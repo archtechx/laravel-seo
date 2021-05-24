@@ -20,9 +20,6 @@ $rules = [
     ],
     'braces' => true,
     'cast_spaces' => true,
-    'class_attributes_separation' => [
-        'elements' => ['method']
-    ],
     'class_definition' => true,
     'concat_space' => [
         'spacing' => 'one'
@@ -89,9 +86,9 @@ $rules = [
     'normalize_index_brace' => true,
     'not_operator_with_successor_space' => true,
     'object_operator_without_whitespace' => true,
-    'ordered_imports' => ['sortAlgorithm' => 'alpha'],
+    'ordered_imports' => ['sort_algorithm' => 'alpha'],
     'phpdoc_indent' => true,
-    'phpdoc_inline_tag' => true,
+    'general_phpdoc_tag_rename' => true,
     'phpdoc_no_access' => true,
     'phpdoc_no_package' => true,
     'phpdoc_no_useless_inheritdoc' => true,
@@ -102,7 +99,7 @@ $rules = [
     'phpdoc_trim' => true,
     'phpdoc_types' => true,
     'phpdoc_var_without_name' => true,
-    'psr4' => true,
+    'psr_autoloading' => true,
     'self_accessor' => true,
     'short_scalar_cast' => true,
     'simplified_null_return' => false, // disabled by Shift
@@ -121,7 +118,7 @@ $rules = [
     'switch_case_semicolon_to_colon' => true,
     'switch_case_space' => true,
     'ternary_operator_spaces' => true,
-    'trailing_comma_in_multiline_array' => true,
+    'trailing_comma_in_multiline' => true,
     'trim_array_spaces' => true,
     'unary_operator_spaces' => true,
     'whitespace_after_comma_in_array' => true,
