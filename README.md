@@ -229,9 +229,9 @@ public function show(Post $post)
 This example uses a Blade view that sets global SEO config using the values that are passed to the view.
 
 ```html
-@seo('title', $page->name)
-@seo('description', $page->excerpt)
-@seo('flipp', 'content')
+@seo(['title' => $page->name])
+@seo(['description' => $page->excerpt])
+@seo(['flipp' => 'content'])
 
 <h1>{{ $page->title }}</h1>
 <p>{{ $page->excerpt }}</p>
