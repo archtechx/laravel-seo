@@ -49,4 +49,5 @@ test('the blade directive can be used with flipp', function () {
     seo()->title('foo')->description('bar');
 
     expect(blade("@seo('flipp', 'blog')"))->toBe(seo()->flipp('blog'));
+    expect(blade("@seo('flipp', 'blog', ['title' => 'abc'])"))->toBe(seo()->flipp('blog', ['title' => 'abc']));
 });
