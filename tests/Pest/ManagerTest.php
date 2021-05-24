@@ -78,3 +78,7 @@ test('thunks can be used as defaults', function () {
 
     expect(seo('title'))->toBe('bar');
 });
+
+test('setting the defaults returns the manager instance', function () {
+    expect(seo()->title(default: 'foo'))->toBeInstanceOf(SEOManager::class);
+});

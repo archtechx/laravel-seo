@@ -206,7 +206,9 @@ class SEOManager
 
         if (isset($arguments[0])) {
             $this->set($key, $arguments[0]);
+        }
 
+        if (isset($arguments[0]) || isset($arguments['default']) || isset($arguments['modifier']) || isset($arguments['modify'])) {
             return $this;
         }
 
