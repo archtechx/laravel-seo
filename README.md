@@ -239,17 +239,17 @@ For example:
 Once your view is created, register the extension:
 
 ```php
-seo()->extension('facebook', view: 'my-component')
+seo()->extension('facebook', view: 'my-component');
 // The extension will use <x-my-component>
 ```
 
 To set data for an extension (in our case `facebook`), simply prefix calls with the extension name in camelCase, or use the `->set()` method:
 
 ```php
-seo()->facebookFoo('bar')
-seo()->facebookTitle('About us')
-seo()->set('facebook.description', 'We are a web development agency that ...')
-seo(['facebook.description' => 'We are a web development agency that ...'])
+seo()->facebookFoo('bar');
+seo()->facebookTitle('About us');
+seo()->set('facebook.description', 'We are a web development agency that ...');
+seo(['facebook.description' => 'We are a web development agency that ...']);
 ```
 
 To disable an extension, set the second argument in the `extension()` call to false:
