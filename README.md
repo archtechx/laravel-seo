@@ -206,6 +206,41 @@ To disable an extension, set the second argument in the `extension()` call to fa
 seo()->extension('facebook', false);
 ```
 
+## Examples
+
+### Controller
+
+This example configures SEO metadata from a controller.
+
+```php
+public function show(Post $post)
+{
+    seo()
+        ->title($post->title)
+        ->description(Str::limit($post->content, 50))
+        ->flipp('blog', ['title' => $page->title, 'content' => $page->excerpt]);
+        
+    return view('blog.show', compact($post));
+}
+```
+
+### View
+
+This example uses a Blade view that sets global SEO config using the values that are passed to the view.
+
+```html
+@seo('title', $page->name)
+@seo('description', $page->excerpt)
+@seo('flipp', 'content')
+
+<h1>{{ $page->title }}</h1>
+<p>{{ $page->excerpt }}</p>
+
+<p class="prose">
+    {{ $page->body }}
+</p>
+```
+
 ## Development
 
 Run all checks locally:
