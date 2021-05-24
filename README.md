@@ -140,7 +140,7 @@ First, you need to add your Flipp API keys:
     ],
     ```
 
-Then, register your templates:
+Then, register your templates, for example in `AppServiceProvider`:
 ```php
 seo()->flipp('blog', 'v8ywdwho3bso');
 seo()->flipp('page', 'egssigeabtm7');
