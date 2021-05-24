@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ArchTech\SEO;
 
 use Illuminate\Support\Str;
@@ -73,9 +75,10 @@ class SEOManager
     }
 
     /** Set one or more values. */
-    public function set(string|array $key, string|null $value = null): string|array
+    public function set(string|array $key, string|null $value = null): string|array|null
     {
         if (is_array($key)) {
+            /** @var array<string, string> $key */
             foreach ($key as $k => $v) {
                 $this->set($k, $v);
             }
@@ -84,15 +87,15 @@ class SEOManager
                 ->keys()
                 ->mapWithKeys(fn (string $key) => [$key => $this->get($key)])
                 ->toArray();
-        } else {
-            $this->values[$key] = $value;
-
-            if (Str::contains($key, '.')) {
-                $this->extension(Str::before($key, '.'), enabled: true);
-            }
-
-            return $this->get($key);
         }
+
+        $this->values[$key] = $value;
+
+        if (Str::contains($key, '.')) {
+            $this->extension(Str::before($key, '.'), enabled: true);
+        }
+
+        return $this->get($key);
     }
 
     /** Resolve a value. */
@@ -124,7 +127,7 @@ class SEOManager
             ->filter(fn (bool $enabled) => $enabled)
             ->keys()
             ->mapWithKeys(fn (string $extension) => [
-                $extension => $this->meta("extensions.$extension.view") ?? ("seo::extensions." . $extension)
+                $extension => $this->meta("extensions.$extension.view") ?? ('seo::extensions.' . $extension),
             ])
             ->toArray();
     }
@@ -155,12 +158,13 @@ class SEOManager
     /**
      * Get or set metadata.
      * @param string|array $key The key or key-value pair being set.
-     * @param string|array|mixed $value The value (if a single key is provided).
-     * @return mixed
+     * @param string|array|null $value The value (if a single key is provided).
+     * @return $this|string
      */
-    public function meta(string|array $key, mixed $value = null): mixed
+    public function meta(string|array $key, string|array $value = null): mixed
     {
         if (is_array($key)) {
+            /** @var array<string, string> $key */
             foreach ($key as $k => $v) {
                 $this->meta($k, $v);
             }
@@ -178,7 +182,7 @@ class SEOManager
     }
 
     /** Handle magic method calls. */
-    public function __call($name, $arguments)
+    public function __call(string $name, array $arguments): string|array|null|static
     {
         if (isset($this->extensions[$name])) {
             return $this->extension($name, $arguments[0] ?? true);
@@ -209,13 +213,13 @@ class SEOManager
     }
 
     /** Handle magic get. */
-    public function __get(string $key)
+    public function __get(string $key): string|null
     {
         return $this->get(Str::snake($key, '.'));
     }
 
     /** Handle magic set. */
-    public function __set(string $key, mixed $value)
+    public function __set(string $key, string $value)
     {
         return $this->set(Str::snake($key, '.'), $value);
     }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ArchTech\SEO;
 
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use ImLiam\BladeHelper\BladeHelperServiceProvider;
 use ImLiam\BladeHelper\Facades\BladeHelper;
 
 class SEOServiceProvider extends ServiceProvider
@@ -13,6 +13,7 @@ class SEOServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton('seo', SEOManager::class);
+        $this->app->register(BladeHelperServiceProvider::class);
     }
 
     public function boot(): void

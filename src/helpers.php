@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use ArchTech\SEO\SEOManager;
 
 if (! function_exists('seo')) {
@@ -7,7 +9,7 @@ if (! function_exists('seo')) {
     {
         if (! $key) {
             return app('seo');
-        } else if (is_array($key)) {
+        } elseif (is_array($key)) {
             return app('seo')->set($key);
         } else {
             return app('seo')->get($key);

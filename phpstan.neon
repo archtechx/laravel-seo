@@ -9,16 +9,12 @@ parameters:
 
     universalObjectCratesClasses:
         - Illuminate\Routing\Route
+        - ArchTech\SEO\SEOManager
 
     ignoreErrors:
-        # -
-        #     message: '#Offset (.*?) does not exist on array\|null#'
-        #     paths:
-        #         - tests/*
-        # -
-        #    message: '#expects resource, resource\|false given#'
-        #    paths:
-        #        - tests/*
-        # - '#should return \$this#'
+        - '#SEOManager\|array\|string\|null#'
+        - '#string\|false given#'
+        - '#flipp\(\) should return#'
+        - '#\_\_set\(\) has no return typehint specified#'
 
     checkMissingIterableValueType: false

@@ -1,5 +1,7 @@
 <?php
 
+beforeEach(fn () => config(['services.flipp.key' => 'abc']));
+
 test('flipp templates can be set', function () {
     seo()->flipp('blog', 'abcdefg');
 
