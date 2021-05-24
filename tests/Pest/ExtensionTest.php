@@ -25,7 +25,7 @@ test('the twitter extension can be disabled by calling twitter with false', func
 test('when an extension is enabled, all of its keys are included in the resolved values', function () {
     expect(seo()->twitter()->all())
         ->not()->toBeEmpty()
-        ->toHaveKeys(['twitter.title', 'twitter.description', 'twitter.user', 'twitter.image']);
+        ->toHaveKeys(['twitter.title', 'twitter.description', 'twitter.site', 'twitter.image']);
 });
 
 test('extension keys can be set by prefixing the call with the extension name and using camelcase', function () {

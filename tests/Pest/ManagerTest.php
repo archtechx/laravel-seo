@@ -73,7 +73,7 @@ test('thunks can be used as values', function () {
     expect(seo('title'))->toBe('bar');
 });
 
-test('thunks can be used as deafults', function () {
+test('thunks can be used as defaults', function () {
     seo()->title(default: fn () => 'bar');
 
     expect(seo('title'))->toBe('bar');

@@ -52,7 +52,7 @@ title(string $title)
 description(string $description)
 image(string $url)
 
-twitterUser(string $username)
+twitterSite(string $username)
 twitterTitle(string $title)
 twitterDescription(string $description)
 twitterImage(string $url)
@@ -219,7 +219,7 @@ public function show(Post $post)
         ->title($post->title)
         ->description(Str::limit($post->content, 50))
         ->flipp('blog', ['title' => $page->title, 'content' => $page->excerpt]);
-        
+
     return view('blog.show', compact($post));
 }
 ```

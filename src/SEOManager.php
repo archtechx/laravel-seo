@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
  * @method $this site(string $site) Set the site name.
  * @method $this image(string $url) Set the cover image.
  * @method $this twitter(enabled $bool = true) Enable the Twitter extension.
- * @method $this twitterUser(string $username) Set the Twitter author.
+ * @method $this twitterSite(string $username) Set the Twitter author.
  * @method $this twitterTitle(string $title) Set the Twitter title.
  * @method $this twitterDescription(string $description) Set the Twitter description.
  * @method $this twitterImage(string $url) Set the Twitter cover image.
@@ -48,7 +48,7 @@ class SEOManager
     /** Get a list of used keys. */
     protected function getKeys(): array
     {
-        return collect(['site', 'title', 'image', 'description', 'twitter.user', 'twitter.title', 'twitter.image', 'twitter.description'])
+        return collect(['site', 'title', 'image', 'description', 'twitter.site', 'twitter.title', 'twitter.image', 'twitter.description'])
             ->merge(array_keys($this->defaults))
             ->merge(array_keys($this->values))
             ->unique()
