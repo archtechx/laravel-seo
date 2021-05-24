@@ -2,7 +2,7 @@
 package-lock.json
 composer.lock
 vendor/
-.php_cs.cache
+.php-cs-fixer.cache
 .vscode/
 coverage/
 node_modules
