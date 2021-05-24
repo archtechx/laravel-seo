@@ -168,9 +168,11 @@ The `flipp()` method also returns a signed URL to the image, which lets you use 
 
 ## Customization
 
+This package is completely flexible, and can be customized either by having its views modified (to change the existing templates), or by you developing an extension (to add more templates).
+
 ### Views
 
-You can publish views running `php artisan vendor:publish --tag=seo-views`.
+You can publish the Blade views by running `php artisan vendor:publish --tag=seo-views`.
 
 ### Extensions
 
