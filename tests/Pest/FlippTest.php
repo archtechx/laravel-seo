@@ -10,10 +10,16 @@ test('flipp templates can be set', function () {
         ->toHaveKey('blog', 'abcdefg');
 });
 
+test('flipp makes a request to the template not the alias', function () {
+    seo()->flipp('blog', 'abcdefg');
+    expect(seo()->flipp('blog'))
+        ->toContain('s.useflipp.com/abcdefg');
+});
+
 test('flipp templates can be given data', function () {
     seo()->flipp('blog', 'abcdefg');
     expect(seo()->flipp('blog', ['title' => 'abc', 'excerpt' => 'def']))
-        ->toContain('s.useflipp.com/blog')
+        ->toContain('s.useflipp.com/abcdefg')
         ->toContain(base64_encode(json_encode(['title' => 'abc', 'excerpt' => 'def'])));
 });
 
@@ -30,7 +36,7 @@ test("flipp templates use default data when they're not passed any data explicit
     seo()->title('foo')->description('bar');
 
     expect(seo()->flipp('blog'))
-        ->toContain('s.useflipp.com/blog')
+        ->toContain('s.useflipp.com/abcdefg')
         ->toContain(base64_encode(json_encode(['title' => 'foo', 'description' => 'bar'])));
 });
 

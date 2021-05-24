@@ -153,6 +153,8 @@ class SEOManager
 
         $signature = hash_hmac('sha256', $template . $query, config('services.flipp.key'));
 
+        $template = $this->meta("flipp.templates.$template");
+
         return $this->set('image', "https://s.useflipp.com/{$template}.png?s={$signature}&v={$query}");
     }
 
