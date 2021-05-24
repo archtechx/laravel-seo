@@ -161,6 +161,7 @@ class SEOManager
 
         $query = base64_encode(json_encode($data));
 
+        /** @var string $template */
         $template = $this->meta("flipp.templates.$alias");
 
         $signature = hash_hmac('sha256', $template . $query, config('services.flipp.key'));
