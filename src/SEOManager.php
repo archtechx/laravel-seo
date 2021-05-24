@@ -109,6 +109,16 @@ class SEOManager
             ));
     }
 
+    /** Get a value without modifications. */
+    public function raw(string $key): string|null
+    {
+        return isset($this->values[$key])
+            ? value($this->values[$key])
+            : value($this->defaults[$key] ?? (
+                Str::contains($key, '.') ? $this->get(Str::after($key, '.')) : null
+            ));
+    }
+
     /** Configure an extension. */
     public function extension(string $name, bool $enabled = true, string $view = null): static
     {
@@ -144,8 +154,8 @@ class SEOManager
 
         if ($data === null) {
             $data = [
-                'title' => $this->title,
-                'description' => $this->description,
+                'title' => $this->raw('title'),
+                'description' => $this->raw('description'),
             ];
         }
 
