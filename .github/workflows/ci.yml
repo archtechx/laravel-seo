@@ -18,8 +18,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Start docker containers
-      run: docker-compose up -d
     - name: Install composer dependencies
       run: composer install
     - name: Run tests

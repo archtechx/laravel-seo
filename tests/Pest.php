@@ -11,7 +11,7 @@
 |
 */
 
-uses(ArchTech\REPLACE\Tests\TestCase::class)->in('Pest');
+uses(ArchTech\SEO\Tests\TestCase::class)->in('Pest');
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +39,12 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function blade(string $blade): string
 {
-    // ..
+    return eval('ob_start(); ?>' . app('blade.compiler')->compileString($blade) . ' <?php return trim(ob_get_clean());');
+}
+
+function meta(): string
+{
+    return view('seo::components.meta')->render();
 }

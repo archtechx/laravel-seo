@@ -1,16 +1,18 @@
 <?php
 
-namespace ArchTech\REPLACE\Tests;
+namespace ArchTech\SEO\Tests;
 
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
-use ArchTech\REPLACE\REPLACEServiceProvider;
+use ArchTech\SEO\SEOServiceProvider;
+use ImLiam\BladeHelper\BladeHelperServiceProvider;
 
 class TestCase extends TestbenchTestCase
 {
     protected function getPackageProviders($app)
     {
         return [
-            REPLACEServiceProvider::class,
+            SEOServiceProvider::class,
+            BladeHelperServiceProvider::class,
         ];
     }
 }

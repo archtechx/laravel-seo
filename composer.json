@@ -1,5 +1,5 @@
 {
-    "name": "archtechx/replace",
+    "name": "archtechx/laravel-seo",
     "description": "",
     "type": "library",
     "license": "MIT",
@@ -10,17 +10,22 @@
         }
     ],
     "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
         "psr-4": {
-            "ArchTech\\REPLACE\\": "src/"
+            "ArchTech\\SEO\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ArchTech\\REPLACE\\Tests\\": "tests/"
+            "ArchTech\\SEO\\Tests\\": "tests/"
         }
     },
     "require": {
-        "illuminate/support": "^8.24"
+        "php": "^8.0",
+        "illuminate/support": "^8.24",
+        "imliam/laravel-blade-helper": "^1.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.9",
@@ -32,7 +37,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ArchTech\\REPLACE\\PackageServiceProvider"
+                "ArchTech\\SEO\\PackageServiceProvider"
             ]
         }
     }
