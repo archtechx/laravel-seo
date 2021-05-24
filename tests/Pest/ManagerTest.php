@@ -66,3 +66,15 @@ test('magic access gets converted to dot syntax', function () {
     expect(seo('abc.def'))->toBe('xyz');
     expect(seo()->abcDef)->toBe('xyz');
 });
+
+test('thunks can be used as values', function () {
+    seo()->title(fn () => 'bar');
+
+    expect(seo('title'))->toBe('bar');
+});
+
+test('thunks can be used as deafults', function () {
+    seo()->title(default: fn () => 'bar');
+
+    expect(seo('title'))->toBe('bar');
+});

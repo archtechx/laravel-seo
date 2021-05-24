@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ArchTech\SEO;
 
+use Closure;
 use Illuminate\Support\Str;
 
 /**
@@ -70,12 +71,12 @@ class SEOManager
     protected function modify(string $key): string|null
     {
         return isset($this->modifiers[$key])
-            ? $this->modifiers[$key]($this->values[$key])
-            : $this->values[$key];
+            ? $this->modifiers[$key](value($this->values[$key]))
+            : value($this->values[$key]);
     }
 
     /** Set one or more values. */
-    public function set(string|array $key, string|null $value = null): string|array|null
+    public function set(string|array $key, string|Closure|null $value = null): string|array|null
     {
         if (is_array($key)) {
             /** @var array<string, string> $key */
@@ -103,9 +104,9 @@ class SEOManager
     {
         return isset($this->values[$key])
             ? $this->modify($key)
-            : $this->defaults[$key] ?? (
+            : value($this->defaults[$key] ?? (
                 Str::contains($key, '.') ? $this->get(Str::after($key, '.')) : null
-            );
+            ));
     }
 
     /** Configure an extension. */
