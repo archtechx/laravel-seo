@@ -134,10 +134,10 @@ class SEOManager
     }
 
     /** Configure or use Flipp. */
-    public function flipp(string $template, string|array $data = null): string|static
+    public function flipp(string $alias, string|array $data = null): string|static
     {
         if (is_string($data)) {
-            $this->meta("flipp.templates.$template", $data);
+            $this->meta("flipp.templates.$alias", $data);
 
             return $this;
         }
@@ -151,9 +151,9 @@ class SEOManager
 
         $query = base64_encode(json_encode($data));
 
-        $signature = hash_hmac('sha256', $template . $query, config('services.flipp.key'));
+        $template = $this->meta("flipp.templates.$alias");
 
-        $template = $this->meta("flipp.templates.$template");
+        $signature = hash_hmac('sha256', $template . $query, config('services.flipp.key'));
 
         return $this->set('image', "https://s.useflipp.com/{$template}.png?s={$signature}&v={$query}");
     }
