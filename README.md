@@ -210,6 +210,8 @@ seo()->extension('facebook', false);
 
 ### Controller
 
+This example configures SEO metadata from a controller.
+
 ```php
 public function show(Post $post)
 {
