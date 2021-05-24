@@ -17,6 +17,7 @@ Example usage:
 seo()
     ->title($post->title)
     ->description($post->excerpt)
+    ->twitter()
     ->flipp('blog')
 
 // Adds OpenGraph tags
