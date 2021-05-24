@@ -42,3 +42,11 @@ test('flipp images are used as the cover images', function () {
     expect(seo()->flipp('blog'))
         ->toBe(seo('image'));
 });
+
+test('the blade directive can be used with flipp', function () {
+    seo()->flipp('blog', 'abc');
+
+    seo()->title('foo')->description('bar');
+
+    expect(blade("@seo('flipp', 'blog')"))->toBe(seo()->flipp('blog'));
+});
