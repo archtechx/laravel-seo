@@ -226,6 +226,15 @@ This package is completely flexible, and can be customized either by having its 
 
 You can publish the Blade views by running `php artisan vendor:publish --tag=seo-views`.
 
+### Extra tags
+
+To add more tags to the head, you can use the `tag()` and `rawTag()` methods:
+
+```php
+seo()->tag('fb:image', asset('foo'));
+seo()->rawTag('<meta property="fb:url" content="bar" />');
+```
+
 ### Extensions
 
 To use a custom extension, create a Blade *component* with the desired meta tags. The component should read data using `{{ seo()->get('foo') }}` or `@seo('foo')`.
