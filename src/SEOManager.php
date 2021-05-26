@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 /**
  * @method $this title(string $title) Set the title.
  * @method $this description(string $description) Set the description.
+ * @method $this url(string $url) Set the canonical URL.
  * @method $this site(string $site) Set the site name.
  * @method $this image(string $url) Set the cover image.
  * @method $this twitter(enabled $bool = true) Enable the Twitter extension.
@@ -51,7 +52,10 @@ class SEOManager
     /** Get a list of used keys. */
     protected function getKeys(): array
     {
-        return collect(['site', 'title', 'image', 'description', 'twitter.site', 'twitter.title', 'twitter.image', 'twitter.description'])
+        return collect([
+                'site', 'title', 'image', 'description', 'url',
+                'twitter.site', 'twitter.title', 'twitter.image', 'twitter.description'
+            ])
             ->merge(array_keys($this->defaults))
             ->merge(array_keys($this->values))
             ->unique()
@@ -170,6 +174,14 @@ class SEOManager
         $signature = hash_hmac('sha256', $template . $query, config('services.flipp.key'));
 
         return $this->set('image', "https://s.useflipp.com/{$template}.png?s={$signature}&v={$query}");
+    }
+
+    /** Append canonical URL tags to the document head. */
+    public function withUrl(): static
+    {
+        $this->url(request()->url());
+
+        return $this;
     }
 
     /** Get all extra head tags. */

@@ -94,3 +94,27 @@ test('raw tags can be added to the template', function () {
 
     expect(meta())->toContain('<meta foo bar>');
 });
+
+test('canonical url is not included by default', function () {
+    expect(meta())
+        ->not()->toContain('og:url')
+        ->not()->toContain('canonical');
+});
+
+test('canonical url can be read from request', function () {
+    seo()->withUrl();
+
+    expect(meta())
+        ->toContain('<meta property="og:url" content="http://localhost" />')
+        ->toContain('<link rel="canonical" href="http://localhost" />');
+});
+
+test('canonical url can be changed', function () {
+    seo()->withUrl();
+
+    seo()->url('http://foo.com/bar');
+
+    expect(meta())
+        ->toContain('<meta property="og:url" content="http://foo.com/bar" />')
+        ->toContain('<link rel="canonical" href="http://foo.com/bar" />');
+});

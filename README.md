@@ -48,6 +48,7 @@ Use the `seo()` helper to retrieve the SeoManager instance, on which you can cal
 Available methods:
 ```js
 site(string $site)
+url(string $url)
 title(string $title)
 description(string $description)
 image(string $url)
@@ -106,6 +107,31 @@ To configure default values, call the methods with the `default` argument:
 seo()
     ->title(default: 'ArchTech — Meticulously architected web applications')
     ->description(default: 'We are a web development agency that ...');
+```
+
+### Extra tags
+
+To add more tags to the head, you can use the `tag()` and `rawTag()` methods:
+
+```php
+seo()->tag('fb:image', asset('foo'));
+seo()->rawTag('<meta property="fb:url" content="bar" />');
+```
+
+### Canonical URL
+
+To enable the `og:url` and canonical URL `link` tags, call:
+
+```php
+seo()->withUrl();
+```
+
+This will make the package read from `request()->url()` (= the current URL *without* the query string).
+
+If you wish to change the URL, call `seo()->url()`:
+
+```php
+seo()->url(route('products.show', $this->product));
 ```
 
 ### Modifiers
@@ -225,15 +251,6 @@ This package is completely flexible, and can be customized either by having its 
 ### Views
 
 You can publish the Blade views by running `php artisan vendor:publish --tag=seo-views`.
-
-### Extra tags
-
-To add more tags to the head, you can use the `tag()` and `rawTag()` methods:
-
-```php
-seo()->tag('fb:image', asset('foo'));
-seo()->rawTag('<meta property="fb:url" content="bar" />');
-```
 
 ### Extensions
 
