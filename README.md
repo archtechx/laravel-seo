@@ -111,7 +111,7 @@ seo()
 
 ### Extra tags
 
-To add more tags to the head, you can use the `tag()` and `rawTag()` methods:
+To add more tags to the document head, you can use the `tag()` and `rawTag()` methods:
 
 ```php
 seo()->tag('fb:image', asset('foo'));
@@ -126,7 +126,7 @@ To enable the `og:url` and canonical URL `link` tags, call:
 seo()->withUrl();
 ```
 
-This will make the package read from `request()->url()` (= the current URL *without* the query string).
+This will make the package read from `request()->url()` (the current URL *without* the query string).
 
 If you wish to change the URL, call `seo()->url()`:
 
