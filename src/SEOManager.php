@@ -54,7 +54,7 @@ class SEOManager
     {
         return collect([
                 'site', 'title', 'image', 'description', 'url',
-                'twitter.site', 'twitter.title', 'twitter.image', 'twitter.description'
+                'twitter.site', 'twitter.title', 'twitter.image', 'twitter.description',
             ])
             ->merge(array_keys($this->defaults))
             ->merge(array_keys($this->values))
