@@ -191,9 +191,11 @@ class SEOManager
     }
 
     /** Add a head tag. */
-    public function rawTag(string $tag): static
+    public function rawTag(string $key, string $tag = null): static
     {
-        $this->tags[] = $tag;
+        $tag ??= $key;
+
+        $this->tags[$tag] = $tag;
 
         return $this;
     }
@@ -201,7 +203,7 @@ class SEOManager
     /** Add a meta tag. */
     public function tag(string $property, string $content): static
     {
-        $this->rawTag("<meta property=\"{$property}\" content=\"{$content}\" />");
+        $this->rawTag("meta.{$property}", "<meta property=\"{$property}\" content=\"{$content}\" />");
 
         return $this;
     }

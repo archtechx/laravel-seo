@@ -116,6 +116,7 @@ To add more tags to the head, you can use the `tag()` and `rawTag()` methods:
 ```php
 seo()->tag('fb:image', asset('foo'));
 seo()->rawTag('<meta property="fb:url" content="bar" />');
+seo()->rawTag('fb_url', '<meta property="fb:url" content="bar" />'); // Keyed, allows overrides later on
 ```
 
 ### Canonical URL

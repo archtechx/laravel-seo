@@ -90,9 +90,16 @@ test('meta tags can be added to the template', function () {
 });
 
 test('raw tags can be added to the template', function () {
-    seo()->rawTag('<meta foo bar>');
+    seo()->rawTag('foo', '<meta foo bar>');
 
     expect(meta())->toContain('<meta foo bar>');
+});
+
+test('raw tags can be overridden', function () {
+    seo()->rawTag('foo', '<meta abc>');
+    seo()->rawTag('foo', '<meta def>');
+
+    expect(meta())->toContain('<meta abc>');
 });
 
 test('canonical url is not included by default', function () {
