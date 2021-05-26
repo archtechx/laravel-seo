@@ -37,6 +37,9 @@ class SEOManager
     /** Metadata for additional features. */
     protected array $meta = [];
 
+    /** Extra head tags. */
+    protected array $tags = [];
+
     /** Get all used values. */
     public function all(): array
     {
@@ -167,6 +170,28 @@ class SEOManager
         $signature = hash_hmac('sha256', $template . $query, config('services.flipp.key'));
 
         return $this->set('image', "https://s.useflipp.com/{$template}.png?s={$signature}&v={$query}");
+    }
+
+    /** Get all extra head tags. */
+    public function tags(): array
+    {
+        return $this->tags;
+    }
+
+    /** Add a head tag. */
+    public function rawTag(string $tag): static
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /** Add a meta tag. */
+    public function tag(string $property, string $content): static
+    {
+        $this->rawTag("<meta property\"{$property}\" content=\"{$content}\" />");
+
+        return $this;
     }
 
     /**

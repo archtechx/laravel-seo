@@ -82,3 +82,15 @@ test('thunks can be used as defaults', function () {
 test('setting the defaults returns the manager instance', function () {
     expect(seo()->title(default: 'foo'))->toBeInstanceOf(SEOManager::class);
 });
+
+test('meta tags can be added to the template', function () {
+    seo()->tag('fb:image', 'foo');
+
+    expect(meta())->toContain('<meta property="fb:image" content="foo" />');
+});
+
+test('raw tags can be added to the template', function () {
+    seo()->rawTag('<meta foo bar>');
+
+    expect(meta())->toContain('<meta foo bar>');
+});

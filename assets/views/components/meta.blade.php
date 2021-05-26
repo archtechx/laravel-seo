@@ -5,6 +5,10 @@
 @if(seo('description')) <meta property="og:description" content="@seo('description')" /> @endif
 @if(seo('image')) <meta property="og:image" content="@seo('image')" /> @endif
 
+@foreach(seo()->tags() as $tag)
+    {!! $tag !!}
+@endforeach
+
 @foreach(seo()->extensions() as $extension)
     <x-dynamic-component :component="$extension" />
 @endforeach
