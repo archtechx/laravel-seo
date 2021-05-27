@@ -9,15 +9,15 @@ use Illuminate\Support\Str;
 
 /**
  * @method $this title(string $title = null, ...$args) Set the title.
- * @method $this description(string $description) Set the description.
- * @method $this url(string $url) Set the canonical URL.
- * @method $this site(string $site) Set the site name.
- * @method $this image(string $url) Set the cover image.
- * @method $this twitter(enabled $bool = true) Enable the Twitter extension.
- * @method $this twitterSite(string $username) Set the Twitter author.
- * @method $this twitterTitle(string $title) Set the Twitter title.
- * @method $this twitterDescription(string $description) Set the Twitter description.
- * @method $this twitterImage(string $url) Set the Twitter cover image.
+ * @method $this description(string $description = null, ...$args) Set the description.
+ * @method $this url(string $url = null, ...$args) Set the canonical URL.
+ * @method $this site(string $site = null, ...$args) Set the site name.
+ * @method $this image(string $url = null, ...$args) Set the cover image.
+ * @method $this twitter(enabled $bool = true = null, ...$args) Enable the Twitter extension.
+ * @method $this twitterSite(string $username = null, ...$args) Set the Twitter author.
+ * @method $this twitterTitle(string $title = null, ...$args) Set the Twitter title.
+ * @method $this twitterDescription(string $description = null, ...$args) Set the Twitter description.
+ * @method $this twitterImage(string $url = null, ...$args) Set the Twitter cover image.
  */
 class SEOManager
 {
