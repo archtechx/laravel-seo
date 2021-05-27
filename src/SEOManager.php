@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Support\Str;
 
 /**
- * @method $this title(string $title) Set the title.
+ * @method $this title(string $title = null, ...$args) Set the title.
  * @method $this description(string $description) Set the description.
  * @method $this url(string $url) Set the canonical URL.
  * @method $this site(string $site) Set the site name.
