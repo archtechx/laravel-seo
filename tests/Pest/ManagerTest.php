@@ -99,7 +99,9 @@ test('raw tags can be overridden', function () {
     seo()->rawTag('foo', '<meta abc>');
     seo()->rawTag('foo', '<meta def>');
 
-    expect(meta())->toContain('<meta abc>');
+    expect(meta())
+        ->not()->toContain('<meta abc>')
+        ->toContain('<meta def>');
 });
 
 test('canonical url is not included by default', function () {

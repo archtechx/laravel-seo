@@ -195,7 +195,7 @@ class SEOManager
     {
         $tag ??= $key;
 
-        $this->tags[$tag] = $tag;
+        $this->tags[$key] = $tag;
 
         return $this;
     }
