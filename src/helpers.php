@@ -7,12 +7,15 @@ use ArchTech\SEO\SEOManager;
 if (! function_exists('seo')) {
     function seo(string|array $key = null): SEOManager|string|array|null
     {
-        if (! $key) {
+        if ($key === null) {
             return app('seo');
-        } elseif (is_array($key)) {
-            return app('seo')->set($key);
-        } else {
-            return app('seo')->get($key);
         }
+
+        if (is_array($key)) {
+            return app('seo')->set($key);
+        }
+
+        // String key
+        return app('seo')->get($key);
     }
 }
