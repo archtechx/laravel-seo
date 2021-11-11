@@ -99,6 +99,18 @@ When a value is set specifically for Twitter, it will be prioritized over the ge
 seo()->twitterTitle('About us')
 ```
 
+### Favicons
+
+By default, no favicon links will be included. You can manually enable the extension by calling:
+
+```php
+seo()->favicon('path/to/logo.png');
+```
+
+We'll generate a 32x32px `favicon.ico` & `favicon.png` icon. This should be sufficient for most cases.
+
+**Please keep in mind that you need to install the [imagick](https://pecl.php.net/package/imagick) php extension.**
+
 ### Defaults
 
 To configure default values, call the methods with the `default` argument:
