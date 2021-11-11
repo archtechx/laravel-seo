@@ -181,6 +181,10 @@ class SEOManager
     /** Enable favicon extension. */
     public function favicon(string $path): static
     {
+        if (! class_exists(ImageManager::class)) {
+            throw new Exception('Intervention not available, please run `composer require intervention/image`');
+        }
+
         $this->extensions['favicon'] = true;
 
         $doesntHaveFavicon = ! file_exists(public_path('favicon.ico'));

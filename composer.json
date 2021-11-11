@@ -25,14 +25,14 @@
     "require": {
         "php": "^8.0",
         "illuminate/support": "^8.24",
-        "imliam/laravel-blade-helper": "^1.0",
-        "intervention/image": "^2.7"
+        "imliam/laravel-blade-helper": "^1.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.9",
         "nunomaduro/larastan": "^0.6.10",
         "pestphp/pest": "^1.2",
-        "pestphp/pest-plugin-laravel": "^1.0"
+        "pestphp/pest-plugin-laravel": "^1.0",
+        "intervention/image": "^2.7"
     },
     "extra": {
         "laravel": {
