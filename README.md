@@ -107,9 +107,9 @@ By default, no favicon links will be included. You can manually enable the exten
 seo()->favicon('path/to/logo.png');
 ```
 
-We'll generate a 32x32px `favicon.ico` & `favicon.png` icon. This should be sufficient for most cases.
+We'll generate a 32x32px `public/favicon.ico` & `public/favicon.png` icon. This should be sufficient for most cases.
 
-**Please keep in mind that you need to install the [imagick](https://pecl.php.net/package/imagick) php extension.**
+**Please keep in mind that you need to install the [imagick](https://pecl.php.net/package/imagick) php extension and [intervention/image](http://image.intervention.io/) composer package.**
 
 ### Defaults
 
