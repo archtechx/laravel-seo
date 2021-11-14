@@ -251,7 +251,7 @@ class SEOManager
      * Get or set metadata.
      * @param string|array $key The key or key-value pair being set.
      * @param string|array|null $value The value (if a single key is provided).
-     * @return $this|string
+     * @return $this|string|null
      */
     public function meta(string|array $key, string|array $value = null): mixed
     {
