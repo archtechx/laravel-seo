@@ -8,7 +8,6 @@ if (! function_exists('seo')) {
     /**
      * @template T of string|array
      * @param T|null $key
-     * @return SEOManager|string|array|null
      */
     function seo(string|array $key = null): SEOManager|string|array|null
     {

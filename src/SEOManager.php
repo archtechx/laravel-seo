@@ -171,7 +171,7 @@ class SEOManager
             ];
         }
 
-        $query = base64_encode((string)json_encode($data));
+        $query = base64_encode((string) json_encode($data));
 
         /** @var string $template */
         $template = $this->meta("flipp.templates.$alias");
