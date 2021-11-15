@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace ArchTech\SEO;
 
 use Closure;
-use Exception;
 use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
 
 /**
  * @method $this title(string $title = null, ...$args) Set the title.
@@ -182,35 +180,9 @@ class SEOManager
     }
 
     /** Enable favicon extension. */
-    public function favicon(string $path): static
+    public function favicon(): static
     {
-        if (! class_exists(ImageManager::class)) {
-            throw new Exception('Intervention not available, please run `composer require intervention/image`');
-        }
-
         $this->extensions['favicon'] = true;
-
-        $doesntHaveFavicon = ! file_exists(public_path('favicon.ico'));
-        $sourceIconDoesntExist = ! file_exists($path);
-
-        if ($sourceIconDoesntExist) {
-            throw new Exception("Given icon path `{$path}` does not exist.");
-        }
-
-        if ($doesntHaveFavicon) {
-            // GD driver doesn't support .ico, that's why we use ImageMagick.
-            $manager = new ImageManager(['driver' => 'imagick']);
-
-            $manager
-                ->make($path)
-                ->resize(32, 32)
-                ->save(public_path('favicon.ico'));
-
-            $manager
-                ->make($path)
-                ->resize(32, 32)
-                ->save(public_path('favicon.png'));
-        }
 
         return $this;
     }
