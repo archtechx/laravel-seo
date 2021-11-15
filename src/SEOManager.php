@@ -287,7 +287,7 @@ class SEOManager
     /**
      * Handle magic set.
      *
-     * @phpstan-return string|array|null
+     * @return string|array|null
      */
     public function __set(string $key, string $value)
     {
