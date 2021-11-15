@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ArchTech\SEO;
 
+use ArchTech\SEO\Commands\GenerateFaviconsCommand;
 use Illuminate\Support\ServiceProvider;
 use ImLiam\BladeHelper\BladeHelperServiceProvider;
 use ImLiam\BladeHelper\Facades\BladeHelper;
@@ -19,6 +20,12 @@ class SEOServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../assets/views', 'seo');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                GenerateFaviconsCommand::class,
+            ]);
+        }
 
         $this->publishes([
             __DIR__ . '/../assets/views' => resource_path('views/vendor/seo'),

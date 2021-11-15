@@ -104,8 +104,18 @@ seo()->twitterTitle('About us')
 By default, no favicon links will be included. You can manually enable the extension by calling:
 
 ```php
-seo()->favicon('path/to/logo.png');
+seo()->favicon();
 ```
+
+## Generating favicons
+
+To generate favicon, run:
+
+```
+php artisan seo:generate-favicons public/path-to/logo.png
+```
+
+from the artisan console. If no path argument is given we'll fallback to `public/assets/logo.png`.
 
 We'll generate a 32x32px `public/favicon.ico` & `public/favicon.png` icon. This should be sufficient for most cases.
 
