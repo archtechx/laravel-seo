@@ -115,7 +115,7 @@ To generate favicon, run:
 php artisan seo:generate-favicons public/path-to/logo.png
 ```
 
-from the artisan console.
+from the artisan console. If no path argument is given we'll fallback to `public/assets/logo.png`.
 
 We'll generate a 32x32px `public/favicon.ico` & `public/favicon.png` icon. This should be sufficient for most cases.
 
