@@ -10,11 +10,9 @@ parameters:
     universalObjectCratesClasses:
         - Illuminate\Routing\Route
         - ArchTech\SEO\SEOManager
+    checkMissingIterableValueType: false
 
     ignoreErrors:
-        - '#SEOManager\|array\|string\|null#'
-        - '#string\|false given#'
-        - '#flipp\(\) should return#'
-        - '#\_\_set\(\) has no return typehint specified#'
-
-    checkMissingIterableValueType: false
+        # Waiting for https://github.com/phpstan/phpstan/issues/5706
+        - '#^Cannot call method (flipp|get|set)\(\) on ArchTech\\SEO\\SEOManager\|array\|string\|null\.$#'
+        - '#^Method ArchTech\\SEO\\SEOManager::flipp\(\) should return static\(ArchTech\\SEO\\SEOManager\)\|string but returns array\|string\|null\.$#'

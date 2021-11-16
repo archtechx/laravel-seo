@@ -82,11 +82,14 @@ class SEOManager
             : value($this->values[$key]);
     }
 
-    /** Set one or more values. */
+    /**
+     * Set one or more values.
+     *
+     * @param string|array<string, string> $key
+     */
     public function set(string|array $key, string|Closure|null $value = null): string|array|null
     {
         if (is_array($key)) {
-            /** @var array<string, string> $key */
             foreach ($key as $k => $v) {
                 $this->set($k, $v);
             }
@@ -166,7 +169,7 @@ class SEOManager
             ];
         }
 
-        $query = base64_encode(json_encode($data));
+        $query = base64_encode(json_encode($data, JSON_THROW_ON_ERROR));
 
         /** @var string $template */
         $template = $this->meta("flipp.templates.$alias");
@@ -220,7 +223,7 @@ class SEOManager
      * Get or set metadata.
      * @param string|array $key The key or key-value pair being set.
      * @param string|array|null $value The value (if a single key is provided).
-     * @return $this|string
+     * @return $this|string|null
      */
     public function meta(string|array $key, string|array $value = null): mixed
     {
@@ -281,7 +284,11 @@ class SEOManager
         return $this->get(Str::snake($key, '.'));
     }
 
-    /** Handle magic set. */
+    /**
+     * Handle magic set.
+     *
+     * @return string|array|null
+     */
     public function __set(string $key, string $value)
     {
         return $this->set(Str::snake($key, '.'), $value);
