@@ -1,11 +1,5 @@
 name: CI
 
-env:
-  COMPOSE_INTERACTIVE_NO_CLI: 1
-  PHP_CS_FIXER_IGNORE_ENV: 1
-  MYSQL_PORT: 3307
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 on:
   push:
   pull_request:
@@ -13,13 +7,16 @@ on:
 
 jobs:
   pest:
-    name: Tests (Pest)
+    name: Tests (Pest) L${{ matrix.laravel }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        laravel: [8, 9]
 
     steps:
     - uses: actions/checkout@v2
     - name: Install composer dependencies
-      run: composer install
+      run: composer require "laravel/framework:^${{matrix.laravel}}.0"
     - name: Run tests
       run: vendor/bin/pest
 
