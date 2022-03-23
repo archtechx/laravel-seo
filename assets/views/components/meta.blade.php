@@ -1,9 +1,14 @@
 @if(seo('title'))
     <title>@seo('title')</title>
-    <meta property="og:title" content="@seo('title')" />
+
+    @if(seo()->hasTag('og:title'))
+        <meta property="og:title" content="@seo('og:title')" />
+    @else
+        <meta property="og:title" content="@seo('title')" />
+    @endif
 @endif
 
-@if(seo('description')) 
+@if(seo('description'))
     <meta property="og:description" content="@seo('description')" />
     <meta name="description" content="@seo('description')" />
 @endif

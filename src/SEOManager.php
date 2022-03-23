@@ -201,6 +201,18 @@ class SEOManager
         return $this->tags;
     }
 
+    /** Has a specific tag been set? */
+    public function hasRawTag(string $key): bool
+    {
+        return array_key_exists($key, $this->tags);
+    }
+
+    /** Has a specific meta tag been set? */
+    public function hasTag(string $property): bool
+    {
+        return $this->hasRawTag("meta.{$property}");
+    }
+
     /** Add a head tag. */
     public function rawTag(string $key, string $tag = null): static
     {
