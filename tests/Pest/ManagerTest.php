@@ -128,11 +128,19 @@ test('canonical url can be changed', function () {
         ->toContain('<link rel="canonical" href="http://foo.com/bar" />');
 });
 
-test('og:title can be overridden as a tag', function () {
+test('og:title can be overridden using a tag', function () {
     seo()->title('foo')
         ->tag('og:title', 'bar');
 
     expect(meta())
         ->toContain('<title>foo</title>')
         ->toContain('<meta property="og:title" content="bar" />');
+});
+
+test('og:type can be overridden using a tag', function () {
+    expect(meta())->toContain('<meta property="og:type" content="website" />'); // default
+
+    seo()->tag('og:type', 'foo');
+
+    expect(meta())->toContain('<meta property="og:type" content="foo" />'); // overridden
 });

@@ -204,7 +204,7 @@ class SEOManager
     /** Has a specific tag been set? */
     public function hasRawTag(string $key): bool
     {
-        return array_key_exists($key, $this->tags);
+        return isset($this->tags[$key]) && ($this->tags[$key] !== null);
     }
 
     /** Has a specific meta tag been set? */
