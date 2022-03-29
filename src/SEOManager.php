@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
  * @method $this url(string $url = null, ...$args) Set the canonical URL.
  * @method $this site(string $site = null, ...$args) Set the site name.
  * @method $this image(string $url = null, ...$args) Set the cover image.
+ * @method $this type(string $type = null, ...$args) Set the page type.
  * @method $this twitter(enabled $bool = true, ...$args) Enable the Twitter extension.
  * @method $this twitterSite(string $username = null, ...$args) Set the Twitter author.
  * @method $this twitterTitle(string $title = null, ...$args) Set the Twitter title.
@@ -53,7 +54,7 @@ class SEOManager
     protected function getKeys(): array
     {
         return collect([
-                'site', 'title', 'image', 'description', 'url',
+                'site', 'title', 'image', 'description', 'url', 'type',
                 'twitter.site', 'twitter.title', 'twitter.image', 'twitter.description',
             ])
             ->merge(array_keys($this->defaults))

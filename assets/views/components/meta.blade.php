@@ -12,10 +12,11 @@
     <meta name="description" content="@seo('description')" />
 @endif
 
-@unless(seo()->hasTag('og:type'))
-    {{-- If an og:type tag is provided directly, it's included in the @foreach below --}}
+@if(seo('type'))
+    <meta property="og:type" content="@seo('type')" />
+@else
     <meta property="og:type" content="website" />
-@endunless
+@endif
 
 @if(seo('site')) <meta property="og:site_name" content="@seo('site')"> @endif
 

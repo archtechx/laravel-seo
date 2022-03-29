@@ -137,10 +137,12 @@ test('og:title can be overridden using a tag', function () {
         ->toContain('<meta property="og:title" content="bar" />');
 });
 
-test('og:type can be overridden using a tag', function () {
+test('type can be overridden using the type method', function () {
     expect(meta())->toContain('<meta property="og:type" content="website" />'); // default
 
-    seo()->tag('og:type', 'foo');
+    seo()->type('foo');
 
-    expect(meta())->toContain('<meta property="og:type" content="foo" />'); // overridden
+    expect(meta())
+        ->toContain('<meta property="og:type" content="foo" />') // overridden
+        ->not()->toContain('website');
 });
