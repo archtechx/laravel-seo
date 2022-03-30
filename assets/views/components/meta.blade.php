@@ -1,14 +1,22 @@
 @if(seo('title'))
     <title>@seo('title')</title>
-    <meta property="og:title" content="@seo('title')" />
+
+    @unless(seo()->hasTag('og:title'))
+        {{-- If an og:title tag is provided directly, it's included in the @foreach below --}}
+        <meta property="og:title" content="@seo('title')" />
+    @endunless
 @endif
 
-@if(seo('description')) 
+@if(seo('description'))
     <meta property="og:description" content="@seo('description')" />
     <meta name="description" content="@seo('description')" />
 @endif
 
-<meta property="og:type" content="website" />
+@if(seo('type'))
+    <meta property="og:type" content="@seo('type')" />
+@else
+    <meta property="og:type" content="website" />
+@endif
 
 @if(seo('site')) <meta property="og:site_name" content="@seo('site')"> @endif
 
