@@ -32,11 +32,11 @@ class SEOServiceProvider extends ServiceProvider
         ], 'seo-views');
 
         BladeHelper::directive('seo', function (...$args) {
-            // Flipp supports more arguments
-            if ($args[0] === 'flipp') {
-                array_shift($args);
+            // Flipp and Previewify support more arguments
+            if (in_array($args[0], ['flipp', 'previewify'], true)) {
+                $method = array_shift($args);
 
-                return seo()->flipp(...$args);
+                return seo()->{$method}(...$args);
             }
 
             // Two arguments indicate that we're setting a value, e.g. `@seo('title', 'foo')

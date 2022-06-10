@@ -180,6 +180,32 @@ class SEOManager
         return $this->set('image', "https://s.useflipp.com/{$template}.png?s={$signature}&v={$query}");
     }
 
+    /** Configure or use Previewify. */
+    public function previewify(string $alias, int|string|array $data = null): string|static
+    {
+        if (is_string($data) || is_int($data)) {
+            $this->meta("previewify.templates.$alias", (string) $data);
+
+            return $this;
+        }
+
+        if ($data === null) {
+            $data = [
+                'title' => $this->raw('title'),
+                'description' => $this->raw('description'),
+            ];
+        }
+
+        $query = base64_encode(json_encode($data, JSON_THROW_ON_ERROR));
+
+        /** @var string $template */
+        $template = $this->meta("previewify.templates.$alias");
+
+        $signature = hash_hmac('sha256', $query, config('services.previewify.key'));
+
+        return $this->set('image', "https://previewify.app/generate/templates/{$template}/signed?signature={$signature}&fields={$query}");
+    }
+
     /** Enable favicon extension. */
     public function favicon(): static
     {
