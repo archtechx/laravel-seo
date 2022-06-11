@@ -7,7 +7,7 @@ By default, it uses `<title>` and OpenGraph tags. It also ships with a Twitter e
 **Features**:
 - Setting SEO tags from PHP
 - Setting SEO tags from Blade
-- Integration with [Flipp](https://useflipp.com), to automatically generate cover images
+- Integration with [Flipp](https://useflipp.com) and [Previewify](https://previewify.app), to automatically generate cover images
 - Custom extension support
 - Expressive & simple API
 - Customizable views
@@ -214,6 +214,43 @@ seo()->flipp('blog');
 The `flipp()` method also returns a signed URL to the image, which lets you use it in other places, such as blog cover images.
 ```php
 <img alt="@seo('title')" src="@seo('flipp', 'blog')">
+```
+
+### Previewify integration
+
+First, you need to add your Previewify API keys:
+1. Add your API key to the `PREVIEWIFY_KEY` environment variable. You can get the key [here](https://previewify.app/app/account).
+2. Go to `config/services.php` and add:
+    ```php
+    'previewify' => [
+        'key' => env('PREVIEWIFY_KEY'),
+    ],
+    ```
+
+Then, register your templates, for example in `AppServiceProvider`:
+```php
+seo()->previewify('blog', 24);
+seo()->previewify('page', 83);
+```
+
+After that, you can use the templates by calling `seo()->previewify()` like this:
+```php
+seo()->previewify('blog', ['title' => 'Foo', 'content' => 'bar'])`
+```
+
+The call will set the generated image as the OpenGraph and Twitter card images. The generated URLs are signed.
+
+If no data array is provided, the method will use the `title` and `description` from the current SEO config:
+
+```php
+seo()->title($post->title);
+seo()->description($post->excerpt);
+seo()->previewify('blog');
+```
+
+The `previewify()` method also returns a signed URL to the image, which lets you use it in other places, such as blog cover images.
+```php
+<img alt="@seo('title')" src="@seo('previewify', 'blog')">
 ```
 
 ## Examples
