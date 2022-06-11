@@ -53,6 +53,7 @@ title(string $title)
 description(string $description)
 image(string $url)
 
+twitterCreator(string $username)
 twitterSite(string $username)
 twitterTitle(string $title)
 twitterDescription(string $description)
