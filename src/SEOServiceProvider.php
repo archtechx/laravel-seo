@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ArchTech\SEO;
 
 use ArchTech\SEO\Commands\GenerateFaviconsCommand;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use ImLiam\BladeHelper\BladeHelperServiceProvider;
 use ImLiam\BladeHelper\Facades\BladeHelper;
@@ -46,7 +47,13 @@ class SEOServiceProvider extends ServiceProvider
 
             // An array means we don't return anything, e.g. `@seo(['title' => 'foo'])
             if (is_array($args[0])) {
-                seo($args[0]);
+                foreach ($args[0] as $type => $value) {
+                    if (in_array($type, ['flipp', 'previewify'], true)) {
+                        seo()->{$type}(...Arr::wrap($value));
+                    } else {
+                        seo()->set($type, $value);
+                    }
+                }
 
                 return null;
             }

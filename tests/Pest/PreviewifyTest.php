@@ -68,3 +68,10 @@ test('previewify uses the raw title and description', function () {
         ->toContain('previewify.app/generate/templates/1')
         ->toContain(base64_encode(json_encode(['title' => 'foo', 'description' => 'bar'])));
 });
+
+test('the @seo helper can be used for setting a previewify image', function () {
+	seo()->previewify('blog', 1);
+	blade("@seo(['previewify' => ['blog', ['title' => 'abc', 'excerpt' => 'def']]])");
+
+	expect(seo('image'))->toContain('previewify.app/generate/templates/1');
+});

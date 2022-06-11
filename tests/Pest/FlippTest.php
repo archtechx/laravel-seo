@@ -68,3 +68,10 @@ test('flipp uses the raw title and description', function () {
         ->toContain('s.useflipp.com/abcdefg')
         ->toContain(base64_encode(json_encode(['title' => 'foo', 'description' => 'bar'])));
 });
+
+test('the @seo helper can be used for setting a flipp image', function () {
+	seo()->flipp('blog', 'abcdefg');
+	blade("@seo(['flipp' => ['blog', ['title' => 'abc', 'excerpt' => 'def']]])");
+
+	expect(seo('image'))->toContain('s.useflipp.com/abcdefg');
+});
