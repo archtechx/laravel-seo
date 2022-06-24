@@ -192,8 +192,8 @@ class SEOManager
 
         if ($data === null) {
             $data = [
-                'title' => $this->raw('title'),
-                'description' => $this->raw('description'),
+                'previewify:title' => $this->raw('title'),
+                'previewify:description' => $this->raw('description'),
             ];
         }
 

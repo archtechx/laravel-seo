@@ -235,7 +235,7 @@ seo()->previewify('page', 83);
 
 After that, you can use the templates by calling `seo()->previewify()` like this:
 ```php
-seo()->previewify('blog', ['title' => 'Foo', 'content' => 'bar'])`
+seo()->previewify('blog', ['previewify:title' => 'Foo', 'previewify:content' => 'bar'])`
 ```
 
 The call will set the generated image as the OpenGraph and Twitter card images. The generated URLs are signed.
