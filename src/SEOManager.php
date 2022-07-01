@@ -192,10 +192,15 @@ class SEOManager
 
         if ($data === null) {
             $data = [
-                'title' => $this->raw('title'),
-                'description' => $this->raw('description'),
+                'previewify:title' => $this->raw('title'),
+                'previewify:description' => $this->raw('description'),
             ];
-        }
+        } else {
+			$data = array_combine(
+				array_map(fn ($key) => "previewify:{$key}", array_keys($data)),
+				$data,
+			);
+		}
 
         $query = base64_encode(json_encode($data, JSON_THROW_ON_ERROR));
 
