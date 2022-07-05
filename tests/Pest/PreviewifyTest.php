@@ -18,7 +18,7 @@ test('previewify makes a request to the template not the alias', function () {
 
 test('previewify templates can be given data', function () {
     seo()->previewify('blog', 1);
-    expect(seo()->previewify('blog', ['title' => 'abc', 'excerpt' => 'def']))
+    expect(seo()->previewify('blog', ['title' => 'abc', 'previewify:excerpt' => 'def']))
         ->toContain('previewify.app/generate/templates/1')
         ->toContain(base64_encode(json_encode(['previewify:title' => 'abc', 'previewify:excerpt' => 'def'])));
 });

@@ -196,11 +196,11 @@ class SEOManager
                 'previewify:description' => $this->raw('description'),
             ];
         } else {
-            $data = array_combine(
-                array_map(fn ($key) => "previewify:{$key}", array_keys($data)),
-                $data,
-            );
-        }
+			$data = array_combine(
+				array_map(fn ($key) => str_starts_with($key, 'previewify:') ? $key : "previewify:{$key}", array_keys($data)),
+				$data,
+			);
+		}
 
         $query = base64_encode(json_encode($data, JSON_THROW_ON_ERROR));
 
