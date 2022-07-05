@@ -18,16 +18,16 @@ test('previewify makes a request to the template not the alias', function () {
 
 test('previewify templates can be given data', function () {
     seo()->previewify('blog', 1);
-    expect(seo()->previewify('blog', ['title' => 'abc', 'excerpt' => 'def']))
+    expect(seo()->previewify('blog', ['title' => 'abc', 'previewify:excerpt' => 'def']))
         ->toContain('previewify.app/generate/templates/1')
-        ->toContain(base64_encode(json_encode(['title' => 'abc', 'excerpt' => 'def'])));
+        ->toContain(base64_encode(json_encode(['previewify:title' => 'abc', 'previewify:excerpt' => 'def'])));
 });
 
 test('the previewify method returns a link to a signed url', function () {
     seo()->previewify('blog', 1);
 
     expect(seo()->previewify('blog', ['title' => 'abc']))
-        ->toContain('?signature=' . hash_hmac('sha256', base64_encode(json_encode(['title' => 'abc'])), config('services.previewify.key')));
+        ->toContain('?signature=' . hash_hmac('sha256', base64_encode(json_encode(['previewify:title' => 'abc'])), config('services.previewify.key')));
 });
 
 test("previewify templates use default data when they're not passed any data explicitly", function () {
@@ -37,7 +37,7 @@ test("previewify templates use default data when they're not passed any data exp
 
     expect(seo()->previewify('blog'))
         ->toContain('previewify.app/generate/templates/1')
-        ->toContain(base64_encode(json_encode(['title' => 'foo', 'description' => 'bar'])));
+        ->toContain(base64_encode(json_encode(['previewify:title' => 'foo', 'previewify:description' => 'bar'])));
 });
 
 test('previewify images are used as the cover images', function () {
@@ -66,7 +66,7 @@ test('previewify uses the raw title and description', function () {
 
     expect(seo()->previewify('blog'))
         ->toContain('previewify.app/generate/templates/1')
-        ->toContain(base64_encode(json_encode(['title' => 'foo', 'description' => 'bar'])));
+        ->toContain(base64_encode(json_encode(['previewify:title' => 'foo', 'previewify:description' => 'bar'])));
 });
 
 test('the @seo helper can be used for setting a previewify image', function () {

@@ -253,6 +253,9 @@ The `previewify()` method also returns a signed URL to the image, which lets you
 <img alt="@seo('title')" src="@seo('previewify', 'blog')">
 ```
 
+> **Note**
+> The `previewify:` prefix will be automatically prepended to all provided data keys.
+ 
 ## Examples
 
 ### Service Provider
