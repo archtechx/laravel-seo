@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ArchTech\SEO;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 /**
@@ -321,6 +322,38 @@ class SEOManager
         }
 
         return $this->get($key);
+    }
+
+    /** Render blade directive. */
+    public function render(...$args): array|string|null
+    {
+        // Flipp and Previewify support more arguments
+        if (in_array($args[0], ['flipp', 'previewify'], true)) {
+            $method = array_shift($args);
+
+            return $this->{$method}(...$args);
+        }
+
+        // Two arguments indicate that we're setting a value, e.g. `@seo('title', 'foo')
+        if (count($args) === 2) {
+            return $this->set($args[0], $args[1]);
+        }
+
+        // An array means we don't return anything, e.g. `@seo(['title' => 'foo'])
+        if (is_array($args[0])) {
+            foreach ($args[0] as $type => $value) {
+                if (in_array($type, ['flipp', 'previewify'], true)) {
+                    $this->{$type}(...Arr::wrap($value));
+                } else {
+                    $this->set($type, $value);
+                }
+            }
+
+            return null;
+        }
+
+        // A single value means we fetch a value, e.g. `@seo('title')
+        return $this->get($args[0]);
     }
 
     /** Handle magic get. */

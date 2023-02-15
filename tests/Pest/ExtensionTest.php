@@ -1,9 +1,5 @@
 <?php
 
-use ArchTech\SEO\Tests\Etc\FacebookExtension;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\View\Component;
-
 test('the twitter extension is disabled by default', function () {
     expect(seo()->all())
         ->not()->toBeEmpty()
