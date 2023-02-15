@@ -13,7 +13,6 @@ parameters:
     checkMissingIterableValueType: false
 
     ignoreErrors:
-        # Waiting for https://github.com/phpstan/phpstan/issues/5706
-        - '#^Cannot call method (flipp|previewify|get|set)\(\) on ArchTech\\SEO\\SEOManager\|array\|string\|null\.$#'
         - '#^Method ArchTech\\SEO\\SEOManager::flipp\(\) should return static\(ArchTech\\SEO\\SEOManager\)\|string but returns array\|string\|null\.$#'
         - '#^Method ArchTech\\SEO\\SEOManager::previewify\(\) should return static\(ArchTech\\SEO\\SEOManager\)\|string but returns array\|string\|null\.$#'
+        - '#^Method ArchTech\\SEO\\SEOManager::render\(\) has parameter \$args with no type specified\.$#'

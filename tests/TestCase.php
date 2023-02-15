@@ -4,7 +4,6 @@ namespace ArchTech\SEO\Tests;
 
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
 use ArchTech\SEO\SEOServiceProvider;
-use ImLiam\BladeHelper\BladeHelperServiceProvider;
 
 class TestCase extends TestbenchTestCase
 {
@@ -12,7 +11,6 @@ class TestCase extends TestbenchTestCase
     {
         return [
             SEOServiceProvider::class,
-            BladeHelperServiceProvider::class,
         ];
     }
 }

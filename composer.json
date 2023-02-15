@@ -24,8 +24,8 @@
     },
     "require": {
         "php": "^8.0",
-        "illuminate/support": "^8.24|^9.0",
-        "imliam/laravel-blade-helper": "^1.4"
+        "illuminate/support": "^8.24|^9.0|^10.0",
+        "illuminate/view": "^8.24|^9.0|^10.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.23|^7.0",
