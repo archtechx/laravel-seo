@@ -272,7 +272,7 @@ seo()
     ->description(default: 'We are a development agency ...')
     ->image(default: fn () => asset('header.png'))
     ->flipp('blog', 'o1vhcg5npgfu')
-    ->twitterSite('archtechx');
+    ->twitterSite('@archtechx');
 ```
 
 ### Controller
