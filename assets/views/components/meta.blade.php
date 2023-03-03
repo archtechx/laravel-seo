@@ -20,6 +20,8 @@
 
 @if(seo('site')) <meta property="og:site_name" content="@seo('site')"> @endif
 
+@if(seo('locale')) <meta property="og:locale" content="@seo('locale')" /> @endif
+
 @if(seo('image')) <meta property="og:image" content="@seo('image')" /> @endif
 
 @if(seo('url'))

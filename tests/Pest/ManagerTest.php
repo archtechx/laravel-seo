@@ -146,3 +146,14 @@ test('type can be overridden using the type method', function () {
         ->toContain('<meta property="og:type" content="foo" />') // overridden
         ->not()->toContain('website');
 });
+
+test('og:locale is not included by default', function () {
+    expect(meta())
+        ->not()->toContain('og:locale');
+});
+
+test('og:locale can be added to the template', function () {
+    seo()->locale('de_DE');
+
+    expect(meta())->toContain('<meta property="og:locale" content="de_DE" />');
+});

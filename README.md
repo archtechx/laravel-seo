@@ -52,6 +52,7 @@ url(string $url)
 title(string $title)
 description(string $description)
 image(string $url)
+locale(string $locale)
 
 twitterCreator(string $username)
 twitterSite(string $username)
@@ -157,6 +158,16 @@ If you wish to change the URL, call `seo()->url()`:
 ```php
 seo()->url(route('products.show', $this->product));
 ```
+
+### Locale
+
+To set the `og:locale` property:
+
+```php
+seo()->locale('de_DE');
+```
+
+Expected format is `language_TERRITORY`.
 
 ### Modifiers
 
