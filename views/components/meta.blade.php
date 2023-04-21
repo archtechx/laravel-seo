@@ -13,7 +13,7 @@
 @endif
 
 @if(seo('keywords'))
-    <meta name="keywords" content="@seo('keywords')">
+    <meta name="keywords" content="@seo('keywords')" />
 @endif
 
 @if(seo('type'))
