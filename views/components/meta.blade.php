@@ -12,6 +12,10 @@
     <meta name="description" content="@seo('description')" />
 @endif
 
+@if(seo('keywords'))
+    <meta name="keywords" content="@seo('keywords')">
+@endif
+
 @if(seo('type'))
     <meta property="og:type" content="@seo('type')" />
 @else

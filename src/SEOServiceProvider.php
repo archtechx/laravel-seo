@@ -17,7 +17,7 @@ class SEOServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../assets/views', 'seo');
+        $this->loadViewsFrom(__DIR__ . '/../views', 'seo');
 
         if ($this->app->runningInConsole()) {
             $this->commands([

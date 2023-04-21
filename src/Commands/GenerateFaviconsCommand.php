@@ -20,7 +20,7 @@ class GenerateFaviconsCommand extends Command
         if (! is_string($path)) {
             $this->error('The `from` argument must be a string.');
 
-            return Command::FAILURE;
+            return self::FAILURE;
         }
 
         $this->info('Generating favicons...');
@@ -28,13 +28,13 @@ class GenerateFaviconsCommand extends Command
         if (! class_exists(ImageManager::class)) {
             $this->error('Intervention not available, please run `composer require intervention/image`');
 
-            return Command::FAILURE;
+            return self::FAILURE;
         }
 
         if (! file_exists($path)) {
             $this->error("Given icon path `{$path}` does not exist.");
 
-            return Command::FAILURE;
+            return self::FAILURE;
         }
 
         // GD driver doesn't support .ico, that's why we use ImageMagick.
@@ -56,6 +56,6 @@ class GenerateFaviconsCommand extends Command
 
         $this->info('All favicons have been generated!');
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 }
