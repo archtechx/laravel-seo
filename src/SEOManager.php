@@ -11,12 +11,13 @@ use Illuminate\Support\Str;
 /**
  * @method $this title(string $title = null, ...$args) Set the title.
  * @method $this description(string $description = null, ...$args) Set the description.
+ * @method $this keywords(string $keywords = null, ...$args) Set the keywords.
  * @method $this url(string $url = null, ...$args) Set the canonical URL.
  * @method $this site(string $site = null, ...$args) Set the site name.
  * @method $this image(string $url = null, ...$args) Set the cover image.
  * @method $this type(string $type = null, ...$args) Set the page type.
  * @method $this locale(string $locale = null, ...$args) Set the page locale.
- * @method $this twitter(enabled $bool = true, ...$args) Enable the Twitter extension.
+ * @method $this twitter(bool $enabled = true, ...$args) Enable the Twitter extension.
  * @method $this twitterCreator(string $username = null, ...$args) Set the Twitter author.
  * @method $this twitterSite(string $username = null, ...$args) Set the Twitter author.
  * @method $this twitterTitle(string $title = null, ...$args) Set the Twitter title.

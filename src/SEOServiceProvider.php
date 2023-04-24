@@ -17,7 +17,7 @@ class SEOServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../assets/views', 'seo');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'seo');
 
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -26,7 +26,7 @@ class SEOServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__ . '/../assets/views' => resource_path('views/vendor/seo'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/seo'),
         ], 'seo-views');
 
         Blade::directive('seo', function ($expression) {
