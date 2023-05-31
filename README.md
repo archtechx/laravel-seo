@@ -52,6 +52,7 @@ url(string $url)
 title(string $title)
 description(string $description)
 image(string $url)
+type(string $type)
 locale(string $locale)
 
 twitterCreator(string $username)
@@ -266,7 +267,7 @@ The `previewify()` method also returns a signed URL to the image, which lets you
 
 > **Note**
 > The `previewify:` prefix will be automatically prepended to all provided data keys.
- 
+
 ## Examples
 
 ### Service Provider

@@ -262,6 +262,8 @@ class SEOManager
     /** Add a meta tag. */
     public function tag(string $property, string $content): static
     {
+        $content = e($content);
+
         $this->rawTag("meta.{$property}", "<meta property=\"{$property}\" content=\"{$content}\" />");
 
         return $this;
@@ -326,19 +328,26 @@ class SEOManager
         return $this->get($key);
     }
 
-    /** Render blade directive. */
+    /**
+     * Render blade directive.
+     *
+     * This is the only method whose output (returned values) is wrapped in e()
+     * as these values are used in the meta.blade.php file via @seo calls.
+     */
     public function render(...$args): array|string|null
     {
         // Flipp and Previewify support more arguments
         if (in_array($args[0], ['flipp', 'previewify'], true)) {
             $method = array_shift($args);
 
+            // The `flipp` and `previewify` methods return image URLs
+            // so we don't sanitize the returned value with e() here
             return $this->{$method}(...$args);
         }
 
         // Two arguments indicate that we're setting a value, e.g. `@seo('title', 'foo')
         if (count($args) === 2) {
-            return $this->set($args[0], $args[1]);
+            return e($this->set($args[0], $args[1]));
         }
 
         // An array means we don't return anything, e.g. `@seo(['title' => 'foo'])
@@ -355,7 +364,7 @@ class SEOManager
         }
 
         // A single value means we fetch a value, e.g. `@seo('title')
-        return $this->get($args[0]);
+        return e($this->get($args[0]));
     }
 
     /** Handle magic get. */
