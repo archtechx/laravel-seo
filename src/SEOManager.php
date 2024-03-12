@@ -373,13 +373,9 @@ class SEOManager
         return $this->get(Str::snake($key, '.'));
     }
 
-    /**
-     * Handle magic set.
-     *
-     * @return string|array|null
-     */
-    public function __set(string $key, string $value)
+    /** Handle magic set. */
+    public function __set(string $key, string $value): void
     {
-        return $this->set(Str::snake($key, '.'), $value);
+        $this->set(Str::snake($key, '.'), $value);
     }
 }
