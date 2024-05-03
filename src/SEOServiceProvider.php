@@ -12,7 +12,7 @@ class SEOServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->singleton('seo', SEOManager::class);
+        $this->app->scoped('seo', SEOManager::class);
     }
 
     public function boot(): void
