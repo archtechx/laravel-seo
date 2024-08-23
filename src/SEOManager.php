@@ -188,7 +188,7 @@ class SEOManager
     public function previewLinks(string $alias, int|string|array $data = null): string|static
     {
         if (is_string($data) || is_int($data)) {
-            $this->meta("previewlinks.templates.$alias", (string) $data);
+            $this->meta("previewlink.templates.$alias", (string) $data);
 
             return $this;
         }
@@ -208,7 +208,7 @@ class SEOManager
         $query = base64_encode(json_encode($data, JSON_THROW_ON_ERROR));
 
         /** @var string $template */
-        $template = $this->meta("previewlinks.templates.$alias");
+        $template = $this->meta("previewlink.templates.$alias");
 
         $signature = hash_hmac('sha256', $query, config('services.previewlinks.key'));
 
@@ -337,10 +337,10 @@ class SEOManager
     public function render(...$args): array|string|null
     {
         // Flipp and PreviewLinks support more arguments
-        if (in_array($args[0], ['flipp', 'previewlinks'], true)) {
+        if (in_array($args[0], ['flipp', 'previewlink'], true)) {
             $method = array_shift($args);
 
-            // The `flipp` and `previewlinks` methods return image URLs
+            // The `flipp` and `previewlink` methods return image URLs
             // so we don't sanitize the returned value with e() here
             return $this->{$method}(...$args);
         }
@@ -353,7 +353,7 @@ class SEOManager
         // An array means we don't return anything, e.g. `@seo(['title' => 'foo'])
         if (is_array($args[0])) {
             foreach ($args[0] as $type => $value) {
-                if (in_array($type, ['flipp', 'previewlinks'], true)) {
+                if (in_array($type, ['flipp', 'previewlink'], true)) {
                     $this->{$type}(...Arr::wrap($value));
                 } else {
                     $this->set($type, $value);
