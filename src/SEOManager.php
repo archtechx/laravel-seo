@@ -185,7 +185,7 @@ class SEOManager
     }
 
     /** Configure or use PreviewLinks. */
-    public function previewLinks(string $alias, int|string|array $data = null): string|static
+    public function previewlink(string $alias, int|string|array $data = null): string|static
     {
         if (is_string($data) || is_int($data)) {
             $this->meta("previewlink.templates.$alias", (string) $data);
