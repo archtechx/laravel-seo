@@ -224,9 +224,13 @@ class SEOManager
     }
 
     /** Append canonical URL tags to the document head. */
-    public function withUrl(): static
+    public function withUrl(?string $origin = null): static
     {
-        $this->url(request()->url());
+        if($origin){
+            $this->url(trim($origin, '/') . '/' . trim(request()->path(), '/'));
+        }else{
+            $this->url(request()->url());
+        }
 
         return $this;
     }
