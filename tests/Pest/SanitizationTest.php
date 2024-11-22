@@ -13,8 +13,8 @@ test('opengraph methods properly sanitize input', function (string $method, stri
     expect($meta)->not()->toContain('content="Testing string " with several \' XSS characters </title> " . \' ."');
     expect($meta)->not()->toContain("content=\"{$unsanitizedContent}\"");
 
-    expect($meta)->toContain("<meta property=\"$property\" content=\"{$sanitizedContent}\" />");
-    expect($meta)->toContain("<meta property=\"$property\" content=\"Testing string &quot; with several &#039; XSS characters &lt;/title&gt; &quot; . &#039; .\" />");
+    expect($meta)->toContain("<meta property=\"$property\" content=\"{$sanitizedContent}\">");
+    expect($meta)->toContain("<meta property=\"$property\" content=\"Testing string &quot; with several &#039; XSS characters &lt;/title&gt; &quot; . &#039; .\">");
 })->with([
     ['site', 'og:site_name'],
     ['url', 'og:url'],
@@ -37,8 +37,8 @@ test('the twitter extension properly sanitizes input', function (string $method,
     expect($meta)->not()->toContain('content="Testing string " with several \' XSS characters </title> " . \' ."');
     expect($meta)->not()->toContain("content=\"{$unsanitizedContent}\"");
 
-    expect($meta)->toContain("<meta name=\"$property\" content=\"{$sanitizedContent}\" />");
-    expect($meta)->toContain("<meta name=\"$property\" content=\"Testing string &quot; with several &#039; XSS characters &lt;/title&gt; &quot; . &#039; .\" />");
+    expect($meta)->toContain("<meta name=\"$property\" content=\"{$sanitizedContent}\">");
+    expect($meta)->toContain("<meta name=\"$property\" content=\"Testing string &quot; with several &#039; XSS characters &lt;/title&gt; &quot; . &#039; .\">");
 })->with([
     ['twitterCreator', 'twitter:creator'],
     ['twitterSite', 'twitter:site'],
@@ -65,8 +65,8 @@ test('the title method properly sanitizes both tags', function () {
 
     expect($meta)->toContain("<title>{$sanitizedContent}</title>");
     expect($meta)->toContain("<title>Testing string &quot; with several &#039; XSS characters &lt;/title&gt; &quot; . &#039; .</title>");
-    expect($meta)->toContain("<meta property=\"og:title\" content=\"{$sanitizedContent}\" />");
-    expect($meta)->toContain("<meta property=\"og:title\" content=\"Testing string &quot; with several &#039; XSS characters &lt;/title&gt; &quot; . &#039; .\" />");
+    expect($meta)->toContain("<meta property=\"og:title\" content=\"{$sanitizedContent}\">");
+    expect($meta)->toContain("<meta property=\"og:title\" content=\"Testing string &quot; with several &#039; XSS characters &lt;/title&gt; &quot; . &#039; .\">");
 });
 
 test('seo blade directive calls are sanitized', function () {

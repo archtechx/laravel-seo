@@ -40,7 +40,7 @@ test('extensions can use custom blade paths', function () {
 
     seo()->facebookTitle('abc');
 
-    expect(meta())->toContain('<meta name="facebook:title" content="ABC" />');
+    expect(meta())->toContain('<meta name="facebook:title" content="ABC">');
 });
 
 test('twitter falls back to the default values', function () {
@@ -56,7 +56,7 @@ test('twitter falls back to the default values', function () {
     expect(seo('twitter.description'))->toBe('bar');
     expect(seo('description'))->toBe('baz');
 
-    expect(meta())->toContain('<meta name="twitter:title" content="foo" />');
+    expect(meta())->toContain('<meta name="twitter:title" content="foo">');
 });
 
 test('extensions are automatically enabled when values for them are set', function () {

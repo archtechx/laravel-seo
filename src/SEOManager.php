@@ -264,7 +264,7 @@ class SEOManager
     {
         $content = e($content);
 
-        $this->rawTag("meta.{$property}", "<meta property=\"{$property}\" content=\"{$content}\" />");
+        $this->rawTag("meta.{$property}", "<meta property=\"{$property}\" content=\"{$content}\">");
 
         return $this;
     }
