@@ -7,7 +7,7 @@ By default, it uses `<title>` and OpenGraph tags. It also ships with a Twitter e
 **Features**:
 - Setting SEO tags from PHP
 - Setting SEO tags from Blade
-- Integration with [Flipp](https://useflipp.com) and [Previewify](https://previewify.app), to automatically generate cover images
+- Integration with [Flipp](https://useflipp.com) and [PreviewLinks](https://previewlinks.io), to automatically generate cover images
 - Custom extension support
 - Expressive & simple API
 - Customizable views
@@ -228,26 +228,26 @@ The `flipp()` method also returns a signed URL to the image, which lets you use 
 <img alt="@seo('title')" src="@seo('flipp', 'blog')">
 ```
 
-### Previewify integration
+### PreviewLinks integration
 
-First, you need to add your Previewify API keys:
-1. Add your API key to the `PREVIEWIFY_KEY` environment variable. You can get the key [here](https://previewify.app/app/account).
+First, you need to add your PreviewLinks API keys:
+1. Add your API key to the `PREVIEWLINKS_API_TOKEN` environment variable. You can get the key [here](https://previewlinks.io/app/account).
 2. Go to `config/services.php` and add:
     ```php
-    'previewify' => [
-        'key' => env('PREVIEWIFY_KEY'),
+    'previewlinks' => [
+        'key' => env('PREVIEWLINKS_API_TOKEN'),
     ],
     ```
 
 Then, register your templates, for example in `AppServiceProvider`:
 ```php
-seo()->previewify('blog', 24);
-seo()->previewify('page', 83);
+seo()->previewlink('blog', 24);
+seo()->previewlink('page', 83);
 ```
 
-After that, you can use the templates by calling `seo()->previewify()` like this:
+After that, you can use the templates by calling `seo()->previewlink()` like this:
 ```php
-seo()->previewify('blog', ['title' => 'Foo', 'content' => 'bar'])`
+seo()->previewlink('blog', ['title' => 'Foo', 'content' => 'bar'])`
 ```
 
 The call will set the generated image as the OpenGraph and Twitter card images. The generated URLs are signed.
@@ -257,16 +257,16 @@ If no data array is provided, the method will use the `title` and `description` 
 ```php
 seo()->title($post->title);
 seo()->description($post->excerpt);
-seo()->previewify('blog');
+seo()->previewlink('blog');
 ```
 
-The `previewify()` method also returns a signed URL to the image, which lets you use it in other places, such as blog cover images.
+The `previewlink()` method also returns a signed URL to the image, which lets you use it in other places, such as blog cover images.
 ```php
-<img alt="@seo('title')" src="@seo('previewify', 'blog')">
+<img alt="@seo('title')" src="@seo('previewlink', 'blog')">
 ```
 
 > **Note**
-> The `previewify:` prefix will be automatically prepended to all provided data keys.
+> The `previewlink:` prefix will be automatically prepended to all provided data keys.
 
 ## Examples
 

@@ -184,23 +184,23 @@ class SEOManager
         return $this->set('image', "https://s.useflipp.com/{$template}.png?s={$signature}&v={$query}");
     }
 
-    /** Configure or use Previewify. */
-    public function previewify(string $alias, int|string|array $data = null): string|static
+    /** Configure or use PreviewLinks. */
+    public function previewlink(string $alias, int|string|array $data = null): string|static
     {
         if (is_string($data) || is_int($data)) {
-            $this->meta("previewify.templates.$alias", (string) $data);
+            $this->meta("previewlink.templates.$alias", (string) $data);
 
             return $this;
         }
 
         if ($data === null) {
             $data = [
-                'previewify:title' => $this->raw('title'),
-                'previewify:description' => $this->raw('description'),
+                'previewlinks:title' => $this->raw('title'),
+                'previewlinks:description' => $this->raw('description'),
             ];
         } else {
             $data = array_combine(
-                array_map(fn ($key) => str_starts_with($key, 'previewify:') ? $key : "previewify:{$key}", array_keys($data)),
+                array_map(fn ($key) => str_starts_with($key, 'previewlinks:') ? $key : "previewlinks:{$key}", array_keys($data)),
                 $data,
             );
         }
@@ -208,11 +208,11 @@ class SEOManager
         $query = base64_encode(json_encode($data, JSON_THROW_ON_ERROR));
 
         /** @var string $template */
-        $template = $this->meta("previewify.templates.$alias");
+        $template = $this->meta("previewlink.templates.$alias");
 
-        $signature = hash_hmac('sha256', $query, config('services.previewify.key'));
+        $signature = hash_hmac('sha256', $query, config('services.previewlinks.key'));
 
-        return $this->set('image', "https://previewify.app/generate/templates/{$template}/signed?signature={$signature}&fields={$query}");
+        return $this->set('image', "https://previewlinks.io/generate/templates/{$template}/signed?fields={$query}&signature={$signature}");
     }
 
     /** Enable favicon extension. */
@@ -336,11 +336,11 @@ class SEOManager
      */
     public function render(...$args): array|string|null
     {
-        // Flipp and Previewify support more arguments
-        if (in_array($args[0], ['flipp', 'previewify'], true)) {
+        // Flipp and PreviewLinks support more arguments
+        if (in_array($args[0], ['flipp', 'previewlink'], true)) {
             $method = array_shift($args);
 
-            // The `flipp` and `previewify` methods return image URLs
+            // The `flipp` and `previewlink` methods return image URLs
             // so we don't sanitize the returned value with e() here
             return $this->{$method}(...$args);
         }
@@ -353,7 +353,7 @@ class SEOManager
         // An array means we don't return anything, e.g. `@seo(['title' => 'foo'])
         if (is_array($args[0])) {
             foreach ($args[0] as $type => $value) {
-                if (in_array($type, ['flipp', 'previewify'], true)) {
+                if (in_array($type, ['flipp', 'previewlink'], true)) {
                     $this->{$type}(...Arr::wrap($value));
                 } else {
                     $this->set($type, $value);

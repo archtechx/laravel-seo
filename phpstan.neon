@@ -14,6 +14,6 @@ parameters:
 
     ignoreErrors:
         - '#^Method ArchTech\\SEO\\SEOManager::flipp\(\) should return static\(ArchTech\\SEO\\SEOManager\)\|string but returns array\|string\|null\.$#'
-        - '#^Method ArchTech\\SEO\\SEOManager::previewify\(\) should return static\(ArchTech\\SEO\\SEOManager\)\|string but returns array\|string\|null\.$#'
+        - '#^Method ArchTech\\SEO\\SEOManager::previewlink\(\) should return static\(ArchTech\\SEO\\SEOManager\)\|string but returns array\|string\|null\.$#'
         - '#^Method ArchTech\\SEO\\SEOManager::render\(\) has parameter \$args with no type specified\.$#'
         - '#^Parameter \#1 \$value of function e expects#'
