@@ -1,8 +1,6 @@
 <?php
 
 use ArchTech\SEO\SEOManager;
-use Illuminate\Http\Request;
-use Mockery\MockInterface;
 
 test('set returns the set value', function () {
     expect(seo()->set('foo', 'bar'))->toBe('bar');
