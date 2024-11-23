@@ -86,7 +86,7 @@ test('setting the defaults returns the manager instance', function () {
 test('meta tags can be added to the template', function () {
     seo()->tag('fb:image', 'foo');
 
-    expect(meta())->toContain('<meta property="fb:image" content="foo" />');
+    expect(meta())->toContain('<meta property="fb:image" content="foo">');
 });
 
 test('raw tags can be added to the template', function () {
@@ -114,8 +114,8 @@ test('canonical url can be read from request', function () {
     seo()->withUrl();
 
     expect(meta())
-        ->toContain('<meta property="og:url" content="http://localhost" />')
-        ->toContain('<link rel="canonical" href="http://localhost" />');
+        ->toContain('<meta property="og:url" content="http://localhost">')
+        ->toContain('<link rel="canonical" href="http://localhost">');
 });
 
 test('canonical url accepts origin', function () {
@@ -134,8 +134,8 @@ test('canonical url can be changed', function () {
     seo()->url('http://foo.com/bar');
 
     expect(meta())
-        ->toContain('<meta property="og:url" content="http://foo.com/bar" />')
-        ->toContain('<link rel="canonical" href="http://foo.com/bar" />');
+        ->toContain('<meta property="og:url" content="http://foo.com/bar">')
+        ->toContain('<link rel="canonical" href="http://foo.com/bar">');
 });
 
 test('og:title can be overridden using a tag', function () {
@@ -144,16 +144,16 @@ test('og:title can be overridden using a tag', function () {
 
     expect(meta())
         ->toContain('<title>foo</title>')
-        ->toContain('<meta property="og:title" content="bar" />');
+        ->toContain('<meta property="og:title" content="bar">');
 });
 
 test('type can be overridden using the type method', function () {
-    expect(meta())->toContain('<meta property="og:type" content="website" />'); // default
+    expect(meta())->toContain('<meta property="og:type" content="website">'); // default
 
     seo()->type('foo');
 
     expect(meta())
-        ->toContain('<meta property="og:type" content="foo" />') // overridden
+        ->toContain('<meta property="og:type" content="foo">') // overridden
         ->not()->toContain('website');
 });
 
@@ -165,5 +165,5 @@ test('og:locale is not included by default', function () {
 test('og:locale can be added to the template', function () {
     seo()->locale('de_DE');
 
-    expect(meta())->toContain('<meta property="og:locale" content="de_DE" />');
+    expect(meta())->toContain('<meta property="og:locale" content="de_DE">');
 });

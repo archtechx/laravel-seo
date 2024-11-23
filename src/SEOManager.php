@@ -9,20 +9,20 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 /**
- * @method $this title(string $title = null, ...$args) Set the title.
- * @method $this description(string $description = null, ...$args) Set the description.
- * @method $this keywords(string $keywords = null, ...$args) Set the keywords.
- * @method $this url(string $url = null, ...$args) Set the canonical URL.
- * @method $this site(string $site = null, ...$args) Set the site name.
- * @method $this image(string $url = null, ...$args) Set the cover image.
- * @method $this type(string $type = null, ...$args) Set the page type.
- * @method $this locale(string $locale = null, ...$args) Set the page locale.
+ * @method $this title(?string $title = null, ...$args) Set the title.
+ * @method $this description(?string $description = null, ...$args) Set the description.
+ * @method $this keywords(?string $keywords = null, ...$args) Set the keywords.
+ * @method $this url(?string $url = null, ...$args) Set the canonical URL.
+ * @method $this site(?string $site = null, ...$args) Set the site name.
+ * @method $this image(?string $url = null, ...$args) Set the cover image.
+ * @method $this type(?string $type = null, ...$args) Set the page type.
+ * @method $this locale(?string $locale = null, ...$args) Set the page locale.
  * @method $this twitter(bool $enabled = true, ...$args) Enable the Twitter extension.
- * @method $this twitterCreator(string $username = null, ...$args) Set the Twitter author.
- * @method $this twitterSite(string $username = null, ...$args) Set the Twitter author.
- * @method $this twitterTitle(string $title = null, ...$args) Set the Twitter title.
- * @method $this twitterDescription(string $description = null, ...$args) Set the Twitter description.
- * @method $this twitterImage(string $url = null, ...$args) Set the Twitter cover image.
+ * @method $this twitterCreator(?string $username = null, ...$args) Set the Twitter author.
+ * @method $this twitterSite(?string $username = null, ...$args) Set the Twitter author.
+ * @method $this twitterTitle(?string $title = null, ...$args) Set the Twitter title.
+ * @method $this twitterDescription(?string $description = null, ...$args) Set the Twitter description.
+ * @method $this twitterImage(?string $url = null, ...$args) Set the Twitter cover image.
  */
 class SEOManager
 {
@@ -135,7 +135,7 @@ class SEOManager
     }
 
     /** Configure an extension. */
-    public function extension(string $name, bool $enabled = true, string $view = null): static
+    public function extension(string $name, bool $enabled = true, ?string $view = null): static
     {
         $this->extensions[$name] = $enabled;
 
@@ -159,7 +159,7 @@ class SEOManager
     }
 
     /** Configure or use Flipp. */
-    public function flipp(string $alias, string|array $data = null): string|static
+    public function flipp(string $alias, string|array|null $data = null): string|static
     {
         if (is_string($data)) {
             $this->meta("flipp.templates.$alias", $data);
@@ -185,7 +185,7 @@ class SEOManager
     }
 
     /** Configure or use Previewify. */
-    public function previewify(string $alias, int|string|array $data = null): string|static
+    public function previewify(string $alias, int|string|array|null $data = null): string|static
     {
         if (is_string($data) || is_int($data)) {
             $this->meta("previewify.templates.$alias", (string) $data);
@@ -254,7 +254,7 @@ class SEOManager
     }
 
     /** Add a head tag. */
-    public function rawTag(string $key, string $tag = null): static
+    public function rawTag(string $key, ?string $tag = null): static
     {
         $tag ??= $key;
 
@@ -268,7 +268,7 @@ class SEOManager
     {
         $content = e($content);
 
-        $this->rawTag("meta.{$property}", "<meta property=\"{$property}\" content=\"{$content}\" />");
+        $this->rawTag("meta.{$property}", "<meta property=\"{$property}\" content=\"{$content}\">");
 
         return $this;
     }
@@ -279,7 +279,7 @@ class SEOManager
      * @param string|array|null $value The value (if a single key is provided).
      * @return $this|string|null
      */
-    public function meta(string|array $key, string|array $value = null): mixed
+    public function meta(string|array $key, string|array|null $value = null): mixed
     {
         if (is_array($key)) {
             /** @var array<string, string> $key */
