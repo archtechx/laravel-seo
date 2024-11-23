@@ -124,8 +124,8 @@ test('canonical url accepts origin', function () {
     seo()->withUrl('https://foo.com');
 
     expect(meta())
-        ->toContain('<meta property="og:url" content="https://foo.com/testing/5" />')
-        ->toContain('<link rel="canonical" href="https://foo.com/testing/5" />');
+        ->toContain('<meta property="og:url" content="https://foo.com/testing/5">')
+        ->toContain('<link rel="canonical" href="https://foo.com/testing/5">');
 });
 
 test('canonical url can be changed', function () {
