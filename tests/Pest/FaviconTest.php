@@ -41,3 +41,28 @@ test('it should fail because the from path is incorrect', function () {
     assertFileDoesNotExist(public_path('favicon.ico'));
     assertFileDoesNotExist(public_path('favicon.png'));
 });
+
+test('it should have custom value with non-empty string', function () {
+    seo()->favicon('foo');
+
+    expect(seo('favicon'))->toBe('foo');
+    expect(meta())->toContain('<link rel="icon" href="foo">');
+});
+
+test('it should not have custom value with empty string or false', function () {
+    seo()->favicon('');
+
+    expect(seo('favicon'))->toBe(null);
+    expect(meta())->not()->toContain('link rel="icon"');
+
+    expect(seo('favicon'))->toBe(null);
+    expect(meta())->not()->toContain('link rel="icon"');
+});
+
+test('it should have default favicon setup', function () {
+    seo()->favicon();
+    expect(seo('favicon'))->toBe(null);
+
+    expect(meta())->toContain('<link rel="icon" type="image/x-icon" href="http://localhost/favicon.ico">');
+    expect(meta())->toContain('<link rel="icon" type="image/png" href="http://localhost/favicon.png">');
+});
