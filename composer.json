@@ -24,15 +24,15 @@
     },
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^10.0|^11.0",
-        "illuminate/view": "^10.0|^11.0"
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/view": "^10.0|^11.0|^12.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^8.0|^9.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
         "nunomaduro/larastan": "^2.4",
-        "pestphp/pest": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "intervention/image": "^2.7"
+        "pestphp/pest": "^2.0|^3.7",
+        "pestphp/pest-plugin-laravel": "^2.0|^3.1",
+        "intervention/image": "^2.7|^3.11"
     },
     "extra": {
         "laravel": {
