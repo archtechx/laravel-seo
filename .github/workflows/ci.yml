@@ -8,54 +8,61 @@ on:
 
 jobs:
   pest:
-    name: Tests (Pest) L${{ matrix.laravel }}
-
-
+    name: Tests (Pest) P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: true
       matrix:
-        laravel: [10, 11, '12']
+        os: [ ubuntu-latest, windows-latest ]
+        php: [ 8.1, 8.2 ]
+        laravel: [ 10.*, 11.*, 12.* ]
+        stability: [ prefer-lowest, prefer-stable ]
+        include:
+          - laravel: 10.*
+            testbench: 8.*
+            carbon: ^2.63
+          - laravel: 11.*
+            testbench: 9.*
+            carbon: ^2.72.2
+          - laravel: 12.*
+            testbench: 10.*
+            carbon: ^3.8.4
+        exclude:
+          - laravel: 11.*
+            php: 8.1
+          - laravel: 12.*
+            php: 8.1
 
 
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
 
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
-          tools: composer:v2
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
 
 
-      - name: Install composer dependencies
-        run: composer require "laravel/framework:^${{matrix.laravel}}.0"
-
-
-
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Run tests
-        run: vendor/bin/pest
+        run: vendor/bin/pest --ci
 
   phpstan:
     name: Static analysis (PHPStan)
-
-
-
     runs-on: ubuntu-latest
-
-
-
     steps:
       - uses: actions/checkout@v2
-
-
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -63,49 +70,26 @@ jobs:
           tools: composer:v2
           coverage: none
 
-
-
       - name: Install composer dependencies
         run: composer install
-
-
-
       - name: Run phpstan
         run: vendor/bin/phpstan analyse
 
   php-cs-fixer:
     name: Code style (php-cs-fixer)
-
-
-
     runs-on: ubuntu-latest
-
-
-
     steps:
       - uses: actions/checkout@v2
-
-
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
           tools: composer:v2
           coverage: none
-
-
-
       - name: Install php-cs-fixer
         run: composer global require friendsofphp/php-cs-fixer
-
-
-
       - name: Run php-cs-fixer
         run: $HOME/.composer/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php
-
-
-
       - name: Commit changes from php-cs-fixer
         uses: EndBug/add-and-commit@v5
         with:
