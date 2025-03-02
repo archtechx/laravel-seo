@@ -10,7 +10,7 @@ jobs:
   pest:
     name: Tests (Pest) P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: true
@@ -34,13 +34,8 @@ jobs:
             php: 8.1
           - laravel: 12.*
             php: 8.1
-
-
-
     steps:
       - uses: actions/checkout@v4
-
-
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -49,7 +44,10 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
-
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
         run: |
