@@ -11,10 +11,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        php: [8.4, 8.3, 8.2]
-        laravel: ['10.*', '11.*', '12.*']
-        stability: [prefer-lowest, prefer-stable]
+        os: [ ubuntu-latest, windows-latest ]
+        php: [ 8.4, 8.3, 8.2 ]
+        laravel: [ '10.*', '11.*', '12.*' ]
+        stability: [ prefer-lowest, prefer-stable ]
         include:
           - laravel: 12.*
             testbench: 10.*
@@ -51,3 +51,42 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/pest
+
+  phpstan:
+    name: Static analysis (PHPStan)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: composer:v2
+          coverage: none
+      - name: Install composer dependencies
+        run: composer install
+      - name: Run phpstan
+        run: vendor/bin/phpstan analyse
+
+  php-cs-fixer:
+    name: Code style (php-cs-fixer)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: composer:v2
+          coverage: none
+      - name: Install php-cs-fixer
+        run: composer global require friendsofphp/php-cs-fixer
+      - name: Run php-cs-fixer
+        run: $HOME/.composer/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php
+      - name: Commit changes from php-cs-fixer
+        uses: EndBug/add-and-commit@v5
+        with:
+          author_name: "PHP CS Fixer"
+          author_email: "phpcsfixer@example.com"
+          message: Fix code style (php-cs-fixer)
