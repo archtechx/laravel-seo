@@ -26,6 +26,7 @@ use Illuminate\Support\Str;
  */
 class SEOManager
 {
+    // for test
     /** Value modifiers. */
     protected array $modifiers = [];
 
