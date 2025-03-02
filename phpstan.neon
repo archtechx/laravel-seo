@@ -10,9 +10,9 @@ parameters:
     universalObjectCratesClasses:
         - Illuminate\Routing\Route
         - ArchTech\SEO\SEOManager
-    checkMissingIterableValueType: false
 
     ignoreErrors:
+        - identifier: missingType.iterableValue
         - '#^Method ArchTech\\SEO\\SEOManager::flipp\(\) should return static\(ArchTech\\SEO\\SEOManager\)\|string but returns array\|string\|null\.$#'
         - '#^Method ArchTech\\SEO\\SEOManager::previewify\(\) should return static\(ArchTech\\SEO\\SEOManager\)\|string but returns array\|string\|null\.$#'
         - '#^Method ArchTech\\SEO\\SEOManager::render\(\) has parameter \$args with no type specified\.$#'
