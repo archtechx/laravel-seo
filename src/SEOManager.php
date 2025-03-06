@@ -240,7 +240,7 @@ class SEOManager
     /** Has a specific tag been set? */
     public function hasRawTag(string $key): bool
     {
-        return isset($this->tags[$key]) && ($this->tags[$key] !== null);
+        return isset($this->tags[$key]);
     }
 
     /** Has a specific meta tag been set? */

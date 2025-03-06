@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        laravel: [10, 11]
+        laravel: [10, 11, 12]
 
     steps:
     - uses: actions/checkout@v2
@@ -61,6 +61,6 @@ jobs:
       - name: Commit changes from php-cs-fixer
         uses: EndBug/add-and-commit@v5
         with:
-          author_name: "PHP CS Fixer"
-          author_email: "phpcsfixer@example.com"
+          author_name: "github-actions[bot]"
+          author_email: "github-actions[bot]@users.noreply.github.com"
           message: Fix code style (php-cs-fixer)
