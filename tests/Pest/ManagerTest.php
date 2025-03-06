@@ -118,6 +118,16 @@ test('canonical url can be read from request', function () {
         ->toContain('<link rel="canonical" href="http://localhost">');
 });
 
+test('canonical url accepts origin', function () {
+    $this->get('/testing/5');
+
+    seo()->withUrl('https://foo.com');
+
+    expect(meta())
+        ->toContain('<meta property="og:url" content="https://foo.com/testing/5">')
+        ->toContain('<link rel="canonical" href="https://foo.com/testing/5">');
+});
+
 test('canonical url can be changed', function () {
     seo()->withUrl();
 
