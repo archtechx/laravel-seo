@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ArchTech\SEO\Commands;
 
 use Illuminate\Console\Command;
+use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
 use Intervention\Image\ImageManager;
 
 class GenerateFaviconsCommand extends Command
@@ -38,7 +39,7 @@ class GenerateFaviconsCommand extends Command
         }
 
         // GD driver doesn't support .ico, that's why we use ImageMagick.
-        $manager = new ImageManager(['driver' => 'imagick']);
+        $manager = new ImageManager(ImagickDriver::class);
 
         $this->comment('Generating ico...');
 
