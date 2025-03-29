@@ -38,9 +38,9 @@ class GenerateFaviconsCommand extends Command
         }
 
         // Check Intervention Image version
-        $isV3 = interface_exists('\Intervention\Image\Interfaces\DriverInterface');
+        $interventionV3 = interface_exists('\Intervention\Image\Interfaces\DriverInterface');
 
-        if ($isV3) {
+        if ($interventionV3) {
             // v3.x implementation
             $manager = new ImageManager(
                 new \Intervention\Image\Drivers\Imagick\Driver()

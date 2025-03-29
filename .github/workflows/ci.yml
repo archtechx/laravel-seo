@@ -7,11 +7,12 @@ on:
 
 jobs:
   pest:
-    name: Tests (Pest) L${{ matrix.laravel }}
+    name: Tests (Pest) L${{ matrix.laravel }} I${{ matrix.intervention }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         laravel: [10, 11, 12]
+        intervention: [2, 3]
 
     steps:
     - uses: actions/checkout@v2
@@ -22,7 +23,9 @@ jobs:
         tools: composer:v2
         coverage: none
     - name: Install composer dependencies
-      run: composer require "laravel/framework:^${{matrix.laravel}}.0"
+      run: |
+        composer require "laravel/framework:^${{matrix.laravel}}.0"
+        composer require "intervention/image:^${{matrix.intervention}}.0"
     - name: Run tests
       run: vendor/bin/pest
 
