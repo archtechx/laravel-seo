@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ArchTech\SEO\Commands;
 
 use Illuminate\Console\Command;
-use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
 use Intervention\Image\ImageManager;
 
 class GenerateFaviconsCommand extends Command
@@ -38,22 +37,40 @@ class GenerateFaviconsCommand extends Command
             return self::FAILURE;
         }
 
-        // GD driver doesn't support .ico, that's why we use ImageMagick.
-        $manager = new ImageManager(ImagickDriver::class);
+        // Check Intervention Image version
+        $isV3 = interface_exists('\Intervention\Image\Interfaces\DriverInterface');
 
-        $this->comment('Generating ico...');
+        if ($isV3) {
+            // v3.x implementation
+            $manager = new ImageManager(
+                new \Intervention\Image\Drivers\Imagick\Driver()
+            );
 
-        $manager
-            ->make($path)
-            ->resize(32, 32)
-            ->save(public_path('favicon.ico'));
+            $this->comment('Generating ico...');
+            $image = $manager->read($path);
+            $image->resize(32, 32);
+            $image->save(public_path('favicon.ico'));
 
-        $this->comment('Generating png...');
+            $this->comment('Generating png...');
+            $image = $manager->read($path);
+            $image->resize(32, 32);
+            $image->save(public_path('favicon.png'));
+        } else {
+            // v2.x implementation
+            $manager = new ImageManager(['driver' => 'imagick']); // @phpstan-ignore argument.type
 
-        $manager
-            ->make($path)
-            ->resize(32, 32)
-            ->save(public_path('favicon.png'));
+            $this->comment('Generating ico...');
+            $manager // @phpstan-ignore method.notFound
+                ->make($path)
+                ->resize(32, 32)
+                ->save(public_path('favicon.ico'));
+
+            $this->comment('Generating png...');
+            $manager // @phpstan-ignore method.notFound
+                ->make($path)
+                ->resize(32, 32)
+                ->save(public_path('favicon.png'));
+        }
 
         $this->info('All favicons have been generated!');
 
