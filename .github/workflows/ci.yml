@@ -24,8 +24,8 @@ jobs:
         coverage: none
     - name: Install composer dependencies
       run: |
-        composer require "laravel/framework:^${{matrix.laravel}}.0"
-        composer require "intervention/image:^${{matrix.intervention}}.0"
+        composer require --dev "laravel/framework:^${{matrix.laravel}}.0"
+        composer require --dev "intervention/image:^${{matrix.intervention}}.0"
     - name: Run tests
       run: vendor/bin/pest
 
