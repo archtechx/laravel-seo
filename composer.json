@@ -32,7 +32,7 @@
         "larastan/larastan": ">=2.4",
         "pestphp/pest": ">=2.0",
         "pestphp/pest-plugin-laravel": ">=2.0",
-        "intervention/image": "^2.0|^3.0"
+        "intervention/image": "^2.7|^3.0"
     },
     "extra": {
         "laravel": {
