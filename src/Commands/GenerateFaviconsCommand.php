@@ -37,22 +37,40 @@ class GenerateFaviconsCommand extends Command
             return self::FAILURE;
         }
 
-        // GD driver doesn't support .ico, that's why we use ImageMagick.
-        $manager = new ImageManager(['driver' => 'imagick']);
+        // Check Intervention Image version
+        $interventionV3 = interface_exists('\Intervention\Image\Interfaces\DriverInterface');
 
-        $this->comment('Generating ico...');
+        if ($interventionV3) {
+            // v3.x implementation
+            $manager = new ImageManager(
+                new \Intervention\Image\Drivers\Imagick\Driver()
+            );
 
-        $manager
-            ->make($path)
-            ->resize(32, 32)
-            ->save(public_path('favicon.ico'));
+            $this->comment('Generating ico...');
+            $image = $manager->read($path);
+            $image->resize(32, 32);
+            $image->save(public_path('favicon.ico'));
 
-        $this->comment('Generating png...');
+            $this->comment('Generating png...');
+            $image = $manager->read($path);
+            $image->resize(32, 32);
+            $image->save(public_path('favicon.png'));
+        } else {
+            // v2.x implementation
+            $manager = new ImageManager(['driver' => 'imagick']); // @phpstan-ignore argument.type
 
-        $manager
-            ->make($path)
-            ->resize(32, 32)
-            ->save(public_path('favicon.png'));
+            $this->comment('Generating ico...');
+            $manager
+                ->make($path) // @phpstan-ignore method.notFound
+                ->resize(32, 32)
+                ->save(public_path('favicon.ico'));
+
+            $this->comment('Generating png...');
+            $manager
+                ->make($path) // @phpstan-ignore method.notFound
+                ->resize(32, 32)
+                ->save(public_path('favicon.png'));
+        }
 
         $this->info('All favicons have been generated!');
 
