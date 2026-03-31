@@ -60,14 +60,14 @@ class GenerateFaviconsCommand extends Command
             $manager = new ImageManager(['driver' => 'imagick']); // @phpstan-ignore argument.type
 
             $this->comment('Generating ico...');
-            $manager // @phpstan-ignore method.notFound
-                ->make($path)
+            $manager
+                ->make($path) // @phpstan-ignore method.notFound
                 ->resize(32, 32)
                 ->save(public_path('favicon.ico'));
 
             $this->comment('Generating png...');
-            $manager // @phpstan-ignore method.notFound
-                ->make($path)
+            $manager
+                ->make($path) // @phpstan-ignore method.notFound
                 ->resize(32, 32)
                 ->save(public_path('favicon.png'));
         }
