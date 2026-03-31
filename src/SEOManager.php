@@ -216,9 +216,13 @@ class SEOManager
     }
 
     /** Enable favicon extension. */
-    public function favicon(): static
+    public function favicon(string|bool $value = true): static
     {
-        $this->extensions['favicon'] = true;
+        if (is_string($value) && !empty($value)) {
+            $this->set('favicon', $value);
+        }
+
+        $this->extensions['favicon'] = !!$value;
 
         return $this;
     }
